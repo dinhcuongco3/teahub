@@ -1,6 +1,7 @@
 The general navbar for our project
 <template>
 	<div class="nav-wrapper">
+		<!-- TODO: pull nav items from a prop -->
 		<div class="nav-items">
 			<router-link
 				class="nav-item"
@@ -14,15 +15,6 @@ The general navbar for our project
 			>
 				About
 			</router-link>
-			<!-- TODO: Reasses manual page for actual manuals-->
-			<!--
-			<router-link
-				class="nav-item"
-				to="/manual"
-			>
-				Manual
-			</router-link>
- -->
 			<router-link
 				class="nav-item"
 				to="/maps"
