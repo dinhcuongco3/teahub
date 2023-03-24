@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Spinner from "@/components/common/loading/Spinner"
+import Spinner from "components/common/loading/Spinner"
 
 export default
 {
@@ -58,7 +58,11 @@ export default
 		/** Is button currently doing a job */
 		inProgress: Boolean,
 
+		/** Is button unavailable for action(s) */
 		inactive: Boolean, 
+
+		/** Invert the colors in on a light background */
+		invertColors: Boolean,
 
 		/** Whether is a smaller pill button or not */
 		pill: Boolean,
@@ -95,6 +99,7 @@ export default
 			classes.active = !this.inactive
 			classes.disabled = this.disabled || this.inProgress
 			classes.inactive = this.inactive
+			classes["invert-colors"] = this.invertColors
 			classes.pill = this.pill
 			classes.progress = this.inProgress
 			classes.success = this.success
@@ -233,6 +238,10 @@ export default
 		width: @diameter;
 		z-index: 100; 
 	}
+	&.invert-colors {
+		color: @color-pastel-blue;
+		background: @myblack;
+	}
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -301,5 +310,6 @@ export default
 		filter: brightness(73%);
 	}
 }
+
 </style>
 
