@@ -17,7 +17,7 @@ TODO: Hover effect
 			</div>
 			<div
 				class="chevron-section"
-				:class="{'collapsed': !selected}"
+				:class="{'collapsed': !selected, 'expanded': selected}"
 			>
 				<font-awesome-icon
 					:icon="['fa', 'chevron-right']"
@@ -25,8 +25,8 @@ TODO: Hover effect
 			</div>
 		</div>
 		<div
-			class="content-section"
-			:class="{'collapsed': !selected}"
+			class="accordion-content-section"
+			:class="{'collapsed': !selected, 'expanded': selected}"
 		>
 			<slot name="content"/>
 		</div>
@@ -70,30 +70,33 @@ export default {
 @import "../../../assets/styles/styles";
 
 .accordion-wrapper:active, .accordion-wrapper:focus {
-	transform: scale(1.03);
+	//transform: scale(1.03);
 }
 .accordion-wrapper {
 	align-content: center;
-	border: 1px solid #dea5ce;
+	border: 1px solid @myblack;
 	border-radius: 7px;
 	color: @myblack;
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
 	flex-shrink: 0;
 	justify-content: space-between;
 	margin: 11px;
+	max-width: @maxwidth;
+	width: @maxwidth;
 	transition: all 0.2s linear;
 
 	&.selected {
-		border: 2px solid transparent;
+		//border: 2px solid transparent;
 	}
 	&.has-nested {
 		border: 1px solid @myblack;
 	}
-	.content-section {
+	.accordion-content-section {
 		height: auto;
-		max-height: 2000px;
+		margin-left:9px;
+		margin-right:9px;
+		max-height: 5000px;
 		overflow-y: hidden;
 		overflow-x: auto;
 		transition: all 0.6s cubic-bezier(0.95, 0.05, 0.05, 0.95);
@@ -113,7 +116,7 @@ export default {
 		&.has-nested {
 			border-bottom: 1px solid @myblack;
 			&.not-selected {
-				border: 2px solid transparent;
+				border: 1px solid transparent;
 			}
 		}
 		:not(.has-nested) {
@@ -146,8 +149,8 @@ export default {
 	}
 }
 @media (hover: hover) {
-	.accordion-wrapper:hover {
-		transform: scale(1.03);
+	.accordion-wrapper:has(.collapsed):hover {
+		//transform: scale(1.03);
 	}
 }
 </style>
