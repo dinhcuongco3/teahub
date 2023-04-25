@@ -41,7 +41,7 @@ TODO: PRobably plugin inputs... :eye_roll:
 import {DateTime} from "luxon"
 import {Duration} from "luxon"
 
-import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar"
+import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar.vue"
 import BookButton from "@/components/buttons/submissions/BookButton.vue"
 import VueCal from "vue-cal"
 import "vue-cal/dist/vuecal.css"

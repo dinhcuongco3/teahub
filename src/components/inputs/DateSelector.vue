@@ -36,7 +36,7 @@ Element for handling manual date (no calendar picker) input
 <script>
 import {DateTime} from "luxon"
 import MyDate from "@/components/inputs/MyDate.vue"
-import Validatable from "@/components/common/Validatable"
+import Validatable from "@/components/common/Validatable.vue"
 
 export default
 {

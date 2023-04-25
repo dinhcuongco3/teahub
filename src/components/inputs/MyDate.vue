@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import LoadingBar from "@/components/common/loading/LoadingBar"
+import LoadingBar from "@/components/common/loading/LoadingBar.vue"
 
 export default {
 	name: "MyDate",

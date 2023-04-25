@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import DateSelector from "@/components/inputs/DateSelector"
+import DateSelector from "@/components/inputs/DateSelector.vue"
 
 export default {
 	name: "AvailabilitySearchBar",
