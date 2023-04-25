@@ -5,11 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "jest ",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build",
-    "test": "vue-cli-service test:unit --coverage --watchAll --no-cache",
+    "test": "jest --coverage --watchAll --no-cache",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -35,6 +33,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@storybook/vue3": "^7.0.2",
     "@storybook/vue3-vite": "^7.0.2",
+    "@testing-library/vue": "^7.0.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "eslint": "^8.19.0",
     "eslint-plugin-jsdoc": "^39.3.3",
@@ -45,7 +44,8 @@
     "less-loader": "^7.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "vitest": "^0.30.1"
   },
   "eslintConfig": {
     "root": true,
