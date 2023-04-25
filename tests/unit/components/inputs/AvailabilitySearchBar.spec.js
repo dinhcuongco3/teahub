@@ -1,18 +1,15 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
+import { mount } from "@vue/test-utils"
 import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar"
 
-const localVue = createLocalVue()
 describe("AvailabilitySearchBar Component", () => 
 {
 	let wrapper
 	beforeEach(() =>
 	{
 		// Instantiate the component
-		wrapper = shallowMount(
+		wrapper = mount(
 			AvailabilitySearchBar,
 			{
-				localVue,
 				propsData: {},
 			}
 		)

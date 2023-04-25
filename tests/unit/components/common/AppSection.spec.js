@@ -1,18 +1,15 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
+import { mount } from "@vue/test-utils"
 import AppSection from "@/components/common/AppSection"
 
-const localVue = createLocalVue()
 describe("AppSection Component", () => 
 {
 	let wrapper
 	beforeEach(() =>
 	{
 		// Instantiate the component
-		wrapper = shallowMount(
+		wrapper = mount(
 			AppSection,
 			{
-				localVue,
 				propsData: {},
 				slots:
 				{

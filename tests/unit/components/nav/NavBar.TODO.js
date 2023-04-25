@@ -1,13 +1,10 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
+import { mount } from "@vue/test-utils"
 import NavBar from "@/components/nav/NavBar"
 import store from "@/store/store.js"
 import VueRouter from "vue-router"
 import Vuex from "vuex"
 
-const localVue = createLocalVue()
 localVue.use(Vuex)
-localVue.use(VueRouter)
 
 const router = new VueRouter({
 	routes: [
@@ -32,7 +29,7 @@ describe("NavBar Component", () =>
 	beforeEach(() =>
 	{
 		// Instantiate the component
-		wrapper = shallowMount(
+		wrapper = mount(
 			NavBar,
 			{
 				localVue,

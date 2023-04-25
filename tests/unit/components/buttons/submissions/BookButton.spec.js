@@ -1,18 +1,15 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
+import { mount } from "@vue/test-utils"
 import BookButton from "@/components/buttons/submissions/BookButton.vue"
 
-const localVue = createLocalVue()
 describe("BookButton Component", () => 
 {
 	let wrapper
 	beforeEach(() =>
 	{
 		// Instantiate the component
-		wrapper = shallowMount(
+		wrapper = mount(
 			BookButton,
 			{
-				localVue,
 				propsData: {},
 			}
 		)

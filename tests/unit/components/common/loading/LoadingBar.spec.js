@@ -1,18 +1,15 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
+import { mount } from "@vue/test-utils"
 import LoadingBar from "@/components/common/loading/LoadingBar"
 
-const localVue = createLocalVue()
 describe("LoadingBar Component", () => 
 {
 	let wrapper
 	beforeEach(() =>
 	{
 		// Instantiate the component
-		wrapper = shallowMount(
+		wrapper = mount(
 			LoadingBar,
 			{
-				localVue,
 				propsData: {},
 			}
 		)
