@@ -1,0 +1,145 @@
+<template>
+	<div id="app">
+		<router-view
+			v-slot="{ Component }"
+		>
+			<transition
+				name="fade"
+				mode="out-in"
+			>
+				<component
+					id="content-wrapper"
+					:is="Component"
+				/>
+			</transition>
+		</router-view>
+	</div>
+</template>
+
+<script>
+import {getAuth,
+	onAuthStateChanged} from "firebase/auth"
+import { initializeApp } from "firebase/app"
+
+import AppSection from "components/common/AppSection"
+import NavBar from "components/nav/NavBar"
+
+export default {
+	name: "App",
+	components:
+	{
+		AppSection,
+		NavBar,
+	},
+	data: function()
+	{
+		return {
+			isNavCollapsed: true,
+		}
+	},
+	computed: {},
+	watch:
+	{
+		/**
+		 * Reset offline banner state from closed when route changes
+		 */
+		"$route" ()
+		{
+			this.$store.commit("setIsShowingBanner", !navigator.onLine)
+		},
+	},
+	methods:
+	{
+	},
+}
+</script>
+
+<style lang='less'>
+@import "../assets/styles/styles";
+
+html, body {
+	color: @myblack;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#app {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: @color-primary-triadic-1;
+	color: @myblack;
+	display: flex;
+	flex-direction: column;
+	//font-family: Avenir, Helvetica, Arial, sans-serif;
+	font-family: 'Poppins', sans-serif;
+	height: 100%;
+	max-height: 100%;
+	min-height: 100%;
+	text-align: center;
+	width: 100%;
+
+}
+#bottom-banner {
+	background-color: @color-primary-triadic-3;
+	bottom: 0;
+	height: 50px;
+	width: 100%;
+}
+#content-wrapper {
+	background-color: @color-primary-triadic-1;
+	overflow: scroll;
+}
+
+.main-section {
+	flex: 1;
+	max-height: 4000px !important;
+}
+.nav-section {
+	min-height: 70px;
+}
+
+#nav-wrapper {
+	background-color: @color-primary-triadic-2;
+}
+
+#top-banner {
+	align-items: center;
+	background-color: @color-purple;
+	color: @myblack;
+	cursor: pointer;
+	display: flex;
+	filter: brightness(1.2);
+	font-weight: 900;
+	justify-content: flex-start;
+	padding: 5px;
+	padding-left: 11px;
+	margin: 0;
+	width: 100%;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
+a:focus-visible {
+	border-radius: 5px;
+	outline: 4px solid @color-focus !important;
+}
+input:focus-visible {
+	outline: 4px solid @color-focus !important;
+	transform: scale(1.02);
+}
+button:focus-visible {
+	outline: 4px solid @color-focus !important;
+	transform: scale(1.02);
+}
+</style>

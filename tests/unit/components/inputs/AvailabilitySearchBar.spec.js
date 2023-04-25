@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar"
+import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar.vue"
 
 describe("AvailabilitySearchBar Component", () => 
 {

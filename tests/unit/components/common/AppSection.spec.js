@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import AppSection from "@/components/common/AppSection"
+import AppSection from "@/components/common/AppSection.vue"
 
 describe("AppSection Component", () => 
 {

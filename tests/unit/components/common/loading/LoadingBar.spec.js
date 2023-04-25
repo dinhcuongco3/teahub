@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import LoadingBar from "@/components/common/loading/LoadingBar"
+import LoadingBar from "@/components/common/loading/LoadingBar.vue"
 
 describe("LoadingBar Component", () => 
 {
