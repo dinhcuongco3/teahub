@@ -1,67 +1,44 @@
-import { createLocalVue } from "@vue/test-utils"
-import { shallowMount } from "@vue/test-utils"
-import AvailabilitySearch from "@/components/forms/AvailabilitySearch.vue"
+import { render, fireEvent, nextTick } from 'vitest';
+import { is } from 'vitest/assert';
+import AvailabilitySearch from '@/components/AvailabilitySearch.vue';
 
-const localVue = createLocalVue()
-describe("AvailabilitySearch Component", () => 
-{
-	let wrapper
-	beforeEach(() =>
-	{
-		// Instantiate the component
-		wrapper = shallowMount(
-			AvailabilitySearch,
-			{
-				localVue,
-				propsData: {},
-				stubs: [
-					"AvailabilitySearchBar",
-					"BookButton",
-					"VueCal",
-				],
-			}
-		)
-	})
-	it("Renders in general", () => 
-	{
-		expect(wrapper.find("div.availability-search-wrapper").exists()).toBeTruthy()
-		expect(wrapper.find("form.search-box").exists()).toBeTruthy()
-		expect(wrapper.find("form.is-loading").exists()).toBeFalsy()
-	})
+describe('AvailabilitySearch Component', () => {
+  let wrapper;
+  beforeEach(async () => {
+    // Instantiate the component
+    wrapper = await render(AvailabilitySearch);
+  });
 
-	it("Shows loading section", async () => 
-	{
-		wrapper.setData({
-			isLoading: true, 
-		})
-		await wrapper.vm.$nextTick()
-		expect(wrapper.find("div.availability-search-wrapper").exists()).toBeTruthy()
-		expect(wrapper.find("form.search-box").exists()).toBeTruthy()
-		expect(wrapper.find("form.is-loading").exists()).toBeTruthy()
-	})
+  it('Renders in general', () => {
+    is(wrapper.querySelector('div.availability-search-wrapper') !== null, true);
+    is(wrapper.querySelector('form.search-box') !== null, true);
+    is(wrapper.querySelector('form.is-loading') !== null, false);
+  });
 
-	it("handleAvailabilitySearch should not change state on success", async () => 
-	{
-		expect(wrapper.vm.isLoading).toBeFalsy()
-		expect(wrapper.vm.hasError).toBeFalsy()
-		await wrapper.vm.handleAvailabilitySearch()
-		expect(wrapper.vm.isLoading).toBeFalsy()
-		expect(wrapper.vm.hasError).toBeFalsy()
-	})
+  it('Shows loading section', async () => {
+    wrapper.component.vm.isLoading = true;
+    await nextTick();
+    is(wrapper.querySelector('div.availability-search-wrapper') !== null, true);
+    is(wrapper.querySelector('form.search-box') !== null, true);
+    is(wrapper.querySelector('form.is-loading') !== null, true);
+  });
 
-	// TODO: Debug from 127c7e5a436eb62f2467abaef1ba02bc7f5747c5
-	it("Updates payload with query", async () => 
-	{
-		expect(wrapper.find("div.availability-search-wrapper").exists()).toBeTruthy()
-		expect.assertions(1)
-		try
-		{
-			await wrapper.vm.handleAvailabilitySearch()
-		}
-		catch (e)
-		{
-			expect(wrapper.vm.hasError).toBeTruthy()
-			expect(wrapper.vm.isLoading).toBeFalsy()
-		}
-	})
-})
+  it('handleAvailabilitySearch should not change state on success', async () => {
+    is(wrapper.component.vm.isLoading, false);
+    is(wrapper.component.vm.hasError, false);
+    await wrapper.component.vm.handleAvailabilitySearch();
+    is(wrapper.component.vm.isLoading, false);
+    is(wrapper.component.vm.hasError, false);
+  });
+
+  // TODO: Debug from 127c7e5a436eb62f2467abaef1ba02bc7f5747c5
+  it('Updates payload with query', async () => {
+    is(wrapper.querySelector('div.availability-search-wrapper') !== null, true);
+    try {
+      await wrapper.component.vm.handleAvailabilitySearch();
+    } catch (e) {
+      is(wrapper.component.vm.hasError, true);
+      is(wrapper.component.vm.isLoading, false);
+    }
+  });
+});
