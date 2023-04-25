@@ -20,14 +20,14 @@ describe("AvailabilitySearch Component", () =>
 			}
 		)
 	})
-	it("Renders in general", () => 
+	it.concurrent("Renders in general", () => 
 	{
 		expect(wrapper.find("div.availability-search-wrapper").exists()).toBeTruthy()
 		expect(wrapper.find("form.search-box").exists()).toBeTruthy()
 		expect(wrapper.find("form.is-loading").exists()).toBeFalsy()
 	})
 
-	it("Shows loading section", async () => 
+	it.concurrent("Shows loading section", async () => 
 	{
 		wrapper.setData({
 			isLoading: true, 
@@ -38,7 +38,7 @@ describe("AvailabilitySearch Component", () =>
 		expect(wrapper.find("form.is-loading").exists()).toBeTruthy()
 	})
 
-	it("handleAvailabilitySearch should not change state on success", async () => 
+	it.concurrent("handleAvailabilitySearch should not change state on success", async () => 
 	{
 		expect(wrapper.vm.isLoading).toBeFalsy()
 		expect(wrapper.vm.hasError).toBeFalsy()
