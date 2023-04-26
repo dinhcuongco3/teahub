@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test:unit": "vitest",
+    "test": "vitest",
+    "test:coverage": "npm run test -- --coverage",
     "lint": "eslint --ext .js,.vue",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest --coverage --watchAll --no-cache",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
