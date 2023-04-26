@@ -10,6 +10,9 @@ describe("BookButton Component", () =>
 		wrapper = mount(
 			BookButton,
 			{
+			  global: {
+				  stubs: ['FontAwesomeIcon']
+			  },
 				propsData: {},
 			}
 		)
