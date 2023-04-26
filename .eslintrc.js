@@ -4,7 +4,12 @@ module.exports = {
     "jest": true,
     node: true
   },
-  "extends": ["plugin:vue/essential", "plugin:jsdoc/recommended", "eslint:recommended", "plugin:storybook/recommended"],
+  "extends": [
+	  "plugin:vue/essential",
+	  "plugin:jsdoc/recommended",
+	  "eslint:recommended",
+	  "plugin:storybook/recommended"
+  ],
   "overrides": [
   // Apply custom .vue files extension rules
   {
@@ -125,6 +130,7 @@ module.exports = {
     "max-len": ["error", {
       "code": 100,
       "ignoreComments": true,
+		//"ignorePattern": "^\s*d=\".*\".*$",
       "ignoreUrls": true,
       "ignoreRegExpLiterals": true,
       "tabWidth": 3

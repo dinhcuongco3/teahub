@@ -42,7 +42,7 @@ export default {
 			required: true,
 			type: Array,
 		},
-	}
+	},
 }
 </script>
 
