@@ -118,8 +118,7 @@ export default {
 				return ""
 			}
 			const total = (this.totalDays * this.dailyRate) + this.cleaningFee
-			console.log(`price: ${total}`)
-			return total
+			return total + ""
 		},
 	},
 	methods:
