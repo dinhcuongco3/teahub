@@ -14,7 +14,7 @@ Button to book a stay
 				class="execute-text execute-loading"
 				key="loading"
 			>
-				Loading
+				{{ bookingText }}
 			</span>
 			<span
 				v-else
@@ -54,6 +54,10 @@ export default {
 	computed: {
 		bookingText ()
 		{
+			if (this.isLoading) 
+			{
+				return "Loading"
+			}
 			if (!this.totalPrice) 
 			{
 				return "Book"

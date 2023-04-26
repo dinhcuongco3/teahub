@@ -6,10 +6,14 @@
 		>
 			<div class="date-container">
 				<div class="flex-box">
-					<span class="label">
+					<span
+						class="label"
+						data-testid="date-selector-start-label"
+					>
 						Start Date
 					</span>
 					<DateSelector
+						data-testid="date-selector-start"
 						:isLoading="isLoading"
 						:maxDate="maxDate"
 						:minDate="today"
@@ -18,10 +22,14 @@
 					/>
 				</div>
 				<div class="flex-box">
-					<span class="label">
+					<span
+						class="label"
+						data-testid="date-selector-end-label"
+					>
 						End Date
 					</span>
 					<DateSelector
+						data-testid="date-selector-end"
 						:isLoading="isLoading"
 						:maxDate="maxDate"
 						:minDate="minDateEnd"
@@ -35,6 +43,7 @@
 </template>
 
 <script>
+import {DateTime} from "luxon"
 import DateSelector from "@/components/inputs/DateSelector.vue"
 
 export default {
@@ -49,6 +58,7 @@ export default {
 	},
 	props:
 	{
+		/** Selected end date for the calendar */
 		end:
 		{
 			default: "",
@@ -59,6 +69,7 @@ export default {
 		/** Whether we are in loading state or not */
 		isLoading: Boolean,
 
+		/** Selected start date for the calendar */
 		start:
 		{
 			default: "",
@@ -68,9 +79,14 @@ export default {
 	},
 	computed:
 	{
+		/**
+		 * @return {string} The max date the user can book out too
+		 */
 		maxDate () 
 		{
-			return "2023-11-11"
+			// Eighteen months in the future
+			let jump18 = DateTime.local().plus({years: 1, months: 6})
+			return jump18.toFormat("yyyy-MM-dd")
 		},
 
 		minDateEnd () 
@@ -80,7 +96,7 @@ export default {
 
 		today ()
 		{
-			return "2022-06-25"
+			return DateTime.local().toFormat("yyyy-MM-dd")
 		},
 	},
 	methods:
