@@ -1,63 +1,63 @@
 <template>
-	<div
-		aria-labelledby="toc-heading"
-		class="sidebar"
-		:class="{ collapsed: isCollapsed }"
-		role="navigation"
-	>
-		<div
-			class="sidebar-header"
-			@click="toggleCollapsed"
-		>
-			<font-awesome-icon
-				v-if="isCollapsed"
-				:icon="['fa', 'chevron-right']"
-			/>
-			<font-awesome-icon
-				v-else
-				:icon="['fa', 'chevron-left']"
-			/>
-		</div>
-		<ul class="sidebar-nav">
-			<li
-				v-for="content in contents"
-				:key="content.id"
-			>
-				<a
-					:href="content.href"
-					@click="toggleCollapsed"
-				>
-					{{ content.formatted }}
-				</a>
-			</li>
-		</ul>
-	</div>
+  <div
+    aria-labelledby="toc-heading"
+    class="sidebar"
+    :class="{ collapsed: isCollapsed }"
+    role="navigation"
+  >
+    <div
+      class="sidebar-header"
+      @click="toggleCollapsed"
+    >
+      <font-awesome-icon
+        v-if="isCollapsed"
+        :icon="['fa', 'chevron-right']"
+      />
+      <font-awesome-icon
+        v-else
+        :icon="['fa', 'chevron-left']"
+      />
+    </div>
+    <ul class="sidebar-nav">
+      <li
+        v-for="content in contents"
+        :key="content.id"
+      >
+        <a
+          :href="content.href"
+          @click="toggleCollapsed"
+        >
+          {{ content.formatted }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-	name: "SideMenu",
-	data () 
+  name: "SideMenu",
+  data () 
+  {
+    return {
+      isCollapsed: true,
+    }
+  },
+  props:
 	{
-		return {
-			isCollapsed: true,
-		}
-	},
-	props:
-	{
-		/** All the content to be indexed */
-		contents:
+	  /** All the content to be indexed */
+	  contents:
 		{
-			required: true,
-			type: Array,
+		  required: true,
+		  type: Array,
 		},
 	},
-	methods: {
-		toggleCollapsed () 
-		{
-			this.isCollapsed = !this.isCollapsed
-		},
-	},
+  methods: {
+    toggleCollapsed () 
+    {
+      this.isCollapsed = !this.isCollapsed
+    },
+  },
 }
 </script>
 

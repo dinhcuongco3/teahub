@@ -1,25 +1,25 @@
 Button to instantiate a new user
 <template>
-	<div
-		class="new-user-login-wrapper"
-		@click="handleClick"
-	>
-		<div class="social-button-dex">
-			Register Email
-		</div>
-		<MyButton
-			class="social-button"
-			:disabled="isDisabled"
-			@click="registerNewUser"
-		>
-			<font-awesome-icon
-				alt="New User Registration" 
-				class="svg-wrapper"
-				:icon="['fa', 'clipboard-list']"
-				:style="{ color: '#FEE8B9' }"
-			/>
-		</MyButton>
-	</div>
+  <div
+    class="new-user-login-wrapper"
+    @click="handleClick"
+  >
+    <div class="social-button-dex">
+      Register Email
+    </div>
+    <MyButton
+      class="social-button"
+      :disabled="isDisabled"
+      @click="registerNewUser"
+    >
+      <font-awesome-icon
+        alt="New User Registration" 
+        class="svg-wrapper"
+        :icon="['fa', 'clipboard-list']"
+        :style="{ color: '#FEE8B9' }"
+      />
+    </MyButton>
+  </div>
 </template>
 
 <script>
@@ -27,158 +27,158 @@ import firebase from "firebase/app"
 import MyButton from "@/components/buttons/MyButton.vue"
 
 export default {
-	name: "NewUserRegistration",
-	components:
+  name: "NewUserRegistration",
+  components:
 	{
-		MyButton,
+	  MyButton,
 	},
-	data () 
+  data () 
+  {
+    return {
+      isShowingErrors: false,
+      registrationError: "",
+    }
+  },
+  props:
 	{
-		return {
-			isShowingErrors: false,
-			registrationError: "",
-		}
+	  email: 
+		{
+		  default: "",
+		  required: true,
+		  type: String,
+		},
+	  password:
+		{
+		  default: "",
+		  required: true,
+		  type: String,
+		},
+
+	  passwordsMatch: Boolean,
+
+	  /** Is the payload ready to be submitted */
+	  ready: Boolean,
 	},
-	props:
+  computed:
 	{
-		email: 
-		{
-			default: "",
-			required: true,
-			type: String,
-		},
-		password:
-		{
-			default: "",
-			required: true,
-			type: String,
-		},
+	  /** @returns {string} Return errors string IFF showing errors; Else empty string */
+	  displayedError () 
+	  {
+	    if (this.isShowingErrors)
+	    {
+	      return this.errors
+	    }
+	    return ""
+	  },
 
-		passwordsMatch: Boolean,
+	  /**
+			 * @todo validate email address too
+			 * @returns {string} Return error message if applicable; Else empty string.
+			 */
+	  errors () 
+	  {
+	    if (!this.passwordsMatch)
+	    {
+	      return "Passwords do not match"
+	    }
+	    if (this.password.length <= 8)
+	    {
+	      return "Password less than 8 characters"
+	    }
+	    if (!/[a-zA-Z]/.test(this.password))
+	    {
+	      return "Password needs alphabetical character"
+	    }
+	    if (!/\d/.test(this.password))
+	    {
+	      return "Password needs numeric character"
+	    }
+	    if (this.registrationError)
+	    {
+	      return this.registrationError
+	    }
 
-		/** Is the payload ready to be submitted */
-		ready: Boolean,
+	    return ""
+	  },
+
+	  /** @returns {boolean} is the button disabled or not */
+	  isDisabled ()
+	  {
+	    if (!this.ready)
+	    {
+	      return true
+	    }
+	    if (!this.email)
+	    {
+	      return true
+	    }
+	    if (this.errors)
+	    {
+	      return true
+	    }
+	    return false
+	  },
 	},
-	computed:
+  methods:
 	{
-		/** @returns {string} Return errors string IFF showing errors; Else empty string */
-		displayedError () 
-		{
-			if (this.isShowingErrors)
-			{
-				return this.errors
-			}
-			return ""
-		},
+	  /** */
+	  handleClick ()
+	  {
+	    this.isShowingErrors = true
+	    this.$emit("click")
+	  },
 
-		/**
-		 * @todo validate email address too
-		 * @returns {string} Return error message if applicable; Else empty string.
-		 */
-		errors () 
-		{
-			if (!this.passwordsMatch)
-			{
-				return "Passwords do not match"
-			}
-			if (this.password.length <= 8)
-			{
-				return "Password less than 8 characters"
-			}
-			if (!/[a-zA-Z]/.test(this.password))
-			{
-				return "Password needs alphabetical character"
-			}
-			if (!/\d/.test(this.password))
-			{
-				return "Password needs numeric character"
-			}
-			if (this.registrationError)
-			{
-				return this.registrationError
-			}
+	  /**
+			 * Use firebase to support logging in with a new account
+			 *
+			 * @todo configure errors for user logging in
+			 * @returns {void}
+			 * @since 0.1.3
+			 */
+	  async registerNewUser ()
+	  {
+	    if (!this.ready)
+	    {
+	      return 
+	    }
+	    this.registrationError = ""
+	    /* eslint-disable no-unused-vars */
+	    try
+	    {
+	      const response = await firebase.auth().createUserWithEmailAndPassword(
+	        this.email,
+	        this.password
+	      )
+	    }
+	    catch (error)
+	    {
+	      const errorCode = error.code
+	      const errorMessage = error.message
 
-			return ""
-		},
+	      // The email of the user's account used.
+	      const email = error.email
 
-		/** @returns {boolean} is the button disabled or not */
-		isDisabled ()
-		{
-			if (!this.ready)
-			{
-				return true
-			}
-			if (!this.email)
-			{
-				return true
-			}
-			if (this.errors)
-			{
-				return true
-			}
-			return false
-		},
-	},
-	methods:
-	{
-		/** */
-		handleClick ()
-		{
-			this.isShowingErrors = true
-			this.$emit("click")
-		},
-
-		/**
-		 * Use firebase to support logging in with a new account
-		 *
-		 * @todo configure errors for user logging in
-		 * @returns {void}
-		 * @since 0.1.3
-		 */
-		async registerNewUser ()
-		{
-			if (!this.ready)
-			{
-				return 
-			}
-			this.registrationError = ""
-			/* eslint-disable no-unused-vars */
-			try
-			{
-				const response = await firebase.auth().createUserWithEmailAndPassword(
-					this.email,
-					this.password
-				)
-			}
-			catch (error)
-			{
-				const errorCode = error.code
-				const errorMessage = error.message
-
-				// The email of the user's account used.
-				const email = error.email
-
-				// The AuthCredential type that was used.
-				const credential = error.credential
-				console.group()
-				console.error(this.$options.name)
-				console.error(errorMessage)
-				console.error(
-					error 
-				)
-				console.groupEnd()
-				this.registrationError = errorMessage
-			}
-			/* eslint-enable no-unused-vars */
-		},
+	      // The AuthCredential type that was used.
+	      const credential = error.credential
+	      console.group()
+	      console.error(this.$options.name)
+	      console.error(errorMessage)
+	      console.error(
+	        error 
+	      )
+	      console.groupEnd()
+	      this.registrationError = errorMessage
+	    }
+	    /* eslint-enable no-unused-vars */
+	  },
 	},
 
-	watch:
+  watch:
 	{
-		displayedError (n)
-		{
-			this.$emit("error", n)
-		},
+	  displayedError (n)
+	  {
+	    this.$emit("error", n)
+	  },
 	},
 }
 </script>

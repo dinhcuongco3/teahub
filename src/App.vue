@@ -1,19 +1,19 @@
 <template>
-	<div id="app">
-		<router-view
-			v-slot="{ Component }"
-		>
-			<transition
-				name="fade"
-				mode="out-in"
-			>
-				<component
-					id="content-wrapper"
-					:is="Component"
-				/>
-			</transition>
-		</router-view>
-	</div>
+  <div id="app">
+    <router-view
+      v-slot="{ Component }"
+    >
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <component
+          id="content-wrapper"
+          :is="Component"
+        />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script>
@@ -21,30 +21,30 @@ import AppSection from "components/common/AppSection"
 import NavBar from "components/nav/NavBar"
 
 export default {
-	name: "App",
-	components:
+  name: "App",
+  components:
 	{
-		AppSection,
-		NavBar,
+	  AppSection,
+	  NavBar,
 	},
-	data: function()
+  data: function()
+  {
+    return {
+      isNavCollapsed: true,
+    }
+  },
+  computed: {},
+  watch:
 	{
-		return {
-			isNavCollapsed: true,
-		}
+	  /**
+			 * Reset offline banner state from closed when route changes
+			 */
+	  "$route" ()
+	  {
+	    this.$store.commit("setIsShowingBanner", !navigator.onLine)
+	  },
 	},
-	computed: {},
-	watch:
-	{
-		/**
-		 * Reset offline banner state from closed when route changes
-		 */
-		"$route" ()
-		{
-			this.$store.commit("setIsShowingBanner", !navigator.onLine)
-		},
-	},
-	methods:
+  methods:
 	{},
 }
 </script>

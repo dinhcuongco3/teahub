@@ -1,54 +1,54 @@
 <script setup>
 const emit = defineEmits([
-	"update",
+  "update",
 ])
 const update = (id) => 
 {
-	emit("update", id)
+  emit("update", id)
 }
 </script>
 
 <template>
-	<div class="filters-wrapper">
-		<MyFilter
-			v-for="(filter) in filters"
-			:key="filter.id"
-			:inactive="! filter.active"
-			type="button"
-			@mouseup="update(filter.id)"
-		>
-			{{ formatTitle(filter) }}
-		</MyFilter>
-	</div>
+  <div class="filters-wrapper">
+    <MyFilter
+      v-for="(filter) in filters"
+      :key="filter.id"
+      :inactive="! filter.active"
+      type="button"
+      @mouseup="update(filter.id)"
+    >
+      {{ formatTitle(filter) }}
+    </MyFilter>
+  </div>
 </template>
 
 <script>
 import MyFilter from "components/buttons/filters/MyFilter"
 
 export default {
-	name: "Filters",
-	components:
+  name: "Filters",
+  components:
 	{
-		MyFilter,
+	  MyFilter,
 	},
-	props:
+  props:
 	{
-		/** An array of filters to be applied to some selection */
-		filters: {
-			required: true,
-			type: Array,
-		},
+	  /** An array of filters to be applied to some selection */
+	  filters: {
+	    required: true,
+	    type: Array,
+	  },
 	},
-	methods:
+  methods:
 	{
-		/**
-		 * @param {object} filter - A self made filter object
-		 * @returns {string} A formatted title
-		 */
-		formatTitle (filter) 
-		{
-			return filter.title
-		},
+	  /**
+			 * @param {object} filter - A self made filter object
+			 * @returns {string} A formatted title
+			 */
+	  formatTitle (filter) 
+	  {
+	    return filter.title
+	  },
 	},
 }
 </script>

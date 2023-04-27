@@ -1,68 +1,68 @@
 The general navbar for our project
 <template>
-	<div class="nav-wrapper">
-		<div class="nav-width">
-			<div class="nav-items">
-				<router-link
-					class="nav-item"
-					to="/"
-				>
-					Home
-				</router-link>
-				<router-link
-					class="nav-item"
-					to="/about"
-				>
-					About
-				</router-link>
-				<router-link
-					class="nav-item"
-					to="/stop-tolling"
-				>
-					<font-awesome-icon icon="fa-solid fa-ban" />&nbsp;Tolling
-				</router-link>
-			</div>
-			<div class="flex-col action-buttons">
-				<EmailButton
-					:email="endorseEmail"
-				>
-					<span class="color-my-black font-size-">ENDORSE</span>
-				</EmailButton>
-				<EmailButton
-					:email="email"
-				>
-					<span class="color-my-black font-size-">EMAIL</span>
-				</EmailButton>
-			</div>
-		</div>
-	</div>
+  <div class="nav-wrapper">
+    <div class="nav-width">
+      <div class="nav-items">
+        <router-link
+          class="nav-item"
+          to="/"
+        >
+          Home
+        </router-link>
+        <router-link
+          class="nav-item"
+          to="/about"
+        >
+          About
+        </router-link>
+        <router-link
+          class="nav-item"
+          to="/stop-tolling"
+        >
+          <font-awesome-icon icon="fa-solid fa-ban" />&nbsp;Tolling
+        </router-link>
+      </div>
+      <div class="flex-col action-buttons">
+        <EmailButton
+          :email="endorseEmail"
+        >
+          <span class="color-my-black font-size-">ENDORSE</span>
+        </EmailButton>
+        <EmailButton
+          :email="email"
+        >
+          <span class="color-my-black font-size-">EMAIL</span>
+        </EmailButton>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import EmailButton from "@/components/buttons/EmailButton"
 
 export default {
-	name: "NavBar",
-	components:
+  name: "NavBar",
+  components:
 	{
-		EmailButton,
+	  EmailButton,
 	},
-	data () 
+  data () 
+  {
+    return {
+      email: "Tanner.L.Woody@gmail.com",
+    }
+  },
+  computed:
 	{
-		return {
-			email: "Tanner.L.Woody@gmail.com",
-		}
-	},
-	computed:
-	{
-		/** @returns {string} endorsement email with subject and body auto filled */
-		endorseEmail ()
-		{
-			const subject = "I will vote for Woody"
-			const body = `Please authenticate yourself with a full name and residing 
+	  /** @returns {string} endorsement email with subject and body auto filled */
+	  endorseEmail ()
+	  {
+	    const subject = "I will vote for Woody"
+	    const body = `Please authenticate yourself with a full name and residing 
 				West Linn Neighborhood`
-			return `${this.email}?subject=${subject}&body=${body}`
-		},
+	    return `${this.email}?subject=${subject}&body=${body}`
+	  },
 	},
 }
 </script>

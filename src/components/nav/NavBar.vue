@@ -1,62 +1,62 @@
 The general navbar for our project
 <template>
-	<div class="nav-wrapper">
-		<!-- TODO: pull nav items from a prop -->
-		<div class="nav-items">
-			<router-link
-				class="nav-item"
-				to="/"
-			>
-				Home
-			</router-link>
-			<router-link
-				class="nav-item"
-				to="/about"
-			>
-				About
-			</router-link>
-			<router-link
-				class="nav-item"
-				to="/maps"
-			>
-				Maps
-			</router-link>
-			<router-link
-				class="nav-item"
-				to="/amenities"
-			>
-				Amenities
-			</router-link>
-			<router-link
-				v-if="!isLoggedIn"
-				class="nav-item"
-				to="/login"
-			>
-				Login
-			</router-link>
-		</div>
-		<div
-			v-if="isLoggedIn"
-			class="user-items options-user"
-		>
-			<div class="user-item user-name">
-				{{ userInitials }}
-			</div>
+  <div class="nav-wrapper">
+    <!-- TODO: pull nav items from a prop -->
+    <div class="nav-items">
+      <router-link
+        class="nav-item"
+        to="/"
+      >
+        Home
+      </router-link>
+      <router-link
+        class="nav-item"
+        to="/about"
+      >
+        About
+      </router-link>
+      <router-link
+        class="nav-item"
+        to="/maps"
+      >
+        Maps
+      </router-link>
+      <router-link
+        class="nav-item"
+        to="/amenities"
+      >
+        Amenities
+      </router-link>
+      <router-link
+        v-if="!isLoggedIn"
+        class="nav-item"
+        to="/login"
+      >
+        Login
+      </router-link>
+    </div>
+    <div
+      v-if="isLoggedIn"
+      class="user-items options-user"
+    >
+      <div class="user-item user-name">
+        {{ userInitials }}
+      </div>
 
-			<div
-				class="user-item user-action"
-				@click="logout"
-			>
-				Logout
-			</div>
-		</div>
-		<div
-			v-else
-			class="user-items options-guest"
-		>
-			<!-- Put any guest actions here -->
-		</div>
-	</div>
+      <div
+        class="user-item user-action"
+        @click="logout"
+      >
+        Logout
+      </div>
+    </div>
+    <div
+      v-else
+      class="user-items options-guest"
+    >
+      <!-- Put any guest actions here -->
+    </div>
+  </div>
 </template>
 
 <script>
@@ -64,73 +64,73 @@ import { getAuth, signOut } from "firebase/auth"
 import store from "@/store/store.js"
 
 export default {
-	name: "NavBar",
-	computed:
+  name: "NavBar",
+  computed:
 	{
-		/**
-		 * @returns {string} - Users first name if loaded; Else empty string
-		 */
-		firstName ()
-		{
-			return store.state.user.user.firstName || ""
-		},
+	  /**
+			 * @returns {string} - Users first name if loaded; Else empty string
+			 */
+	  firstName ()
+	  {
+	    return store.state.user.user.firstName || ""
+	  },
 
-		/**
-		 * @returns {boolean} - Whether the app is initializing the user or not
-		 */
-		isLoadingData ()
-		{
-			return store.state.user.isLoggingIn
-		},
+	  /**
+			 * @returns {boolean} - Whether the app is initializing the user or not
+			 */
+	  isLoadingData ()
+	  {
+	    return store.state.user.isLoggingIn
+	  },
 
-		/**
-		 * @returns {boolean} - Whether a user is logged in or not
-		 */
-		isLoggedIn ()
-		{
-			return store.state.user.isLoggedIn
-		},
+	  /**
+			 * @returns {boolean} - Whether a user is logged in or not
+			 */
+	  isLoggedIn ()
+	  {
+	    return store.state.user.isLoggedIn
+	  },
 
-		/**
-		 * @returns {string} - Users last name if loaded; Else empty string
-		 */
-		lastName ()
-		{
-			return store.state.user.user.lastName || ""
-		},
+	  /**
+			 * @returns {string} - Users last name if loaded; Else empty string
+			 */
+	  lastName ()
+	  {
+	    return store.state.user.user.lastName || ""
+	  },
 
-		/**
-		 * @returns {string} - Users initials to be displayed; Else dash
-		 */
-		userInitials ()
-		{
-			const first = this.firstName.length ? this.firstName[0].toUpperCase() : ""
-			const last = this.lastName.length ? this.lastName[0].toUpperCase() : ""
-			return (first + last) || "-"
-		},
+	  /**
+			 * @returns {string} - Users initials to be displayed; Else dash
+			 */
+	  userInitials ()
+	  {
+	    const first = this.firstName.length ? this.firstName[0].toUpperCase() : ""
+	    const last = this.lastName.length ? this.lastName[0].toUpperCase() : ""
+	    return (first + last) || "-"
+	  },
 	},
-	methods:
+  methods:
 	{
-		/**
-		 * Logout the current user and remove the user session
-		 *
-		 * @returns {void}
-		 */
-		async logout ()
-		{
-			try
-			{
-				const auth = getAuth()
-				await signOut(auth)
-			}
-			catch (error)
-			{
-				console.error(
-					error
-				)
-			}
-			store.dispatch("logoutUser")
-		},
+	  /**
+			 * Logout the current user and remove the user session
+			 *
+			 * @returns {void}
+			 */
+	  async logout ()
+	  {
+	    try
+	    {
+	      const auth = getAuth()
+	      await signOut(auth)
+	    }
+	    catch (error)
+	    {
+	      console.error(
+	        error
+	      )
+	    }
+	    store.dispatch("logoutUser")
+	  },
 	},
 }
 </script>

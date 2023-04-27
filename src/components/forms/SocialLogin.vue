@@ -1,13 +1,13 @@
 User should be able to register/login from multiple places
 <template>
-	<div class="social-login-wrapper">
-		<GoogleLogin class="login-option">
-			or login with Google
-		</GoogleLogin>
-		<FacebookLogin class="login-option">
-			or login with Google
-		</FacebookLogin>
-	</div>
+  <div class="social-login-wrapper">
+    <GoogleLogin class="login-option">
+      or login with Google
+    </GoogleLogin>
+    <FacebookLogin class="login-option">
+      or login with Google
+    </FacebookLogin>
+  </div>
 </template>
 
 <script>
@@ -15,11 +15,11 @@ import FacebookLogin from "@/components/buttons/login/FacebookLogin"
 import GoogleLogin from "@/components/buttons/login/GoogleLogin"
 
 export default {
-	name: "SocialLogin",
-	components: 
+  name: "SocialLogin",
+  components: 
 	{
-		FacebookLogin,
-		GoogleLogin,
+	  FacebookLogin,
+	  GoogleLogin,
 	},
 }
 </script>

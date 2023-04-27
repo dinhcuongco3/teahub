@@ -1,69 +1,69 @@
 <template>
-	<div
-		class="loading-bar-wrapper"
-		:class="classes"
-	/>
+  <div
+    class="loading-bar-wrapper"
+    :class="classes"
+  />
 </template>
 
 <script>
 
 export default
 {
-	name: "LoadingBar",
-	props:
+  name: "LoadingBar",
+  props:
 	{
-		/** Width of the bar */
-		size:
+	  /** Width of the bar */
+	  size:
 		{
-			default: "medium",
-			required: false,
-			type: String,
+		  default: "medium",
+		  required: false,
+		  type: String,
 		},
 
-		/** Height of the bar */
-		tall:
+	  /** Height of the bar */
+	  tall:
 		{
-			required: false,
-			type: Boolean,
+		  required: false,
+		  type: Boolean,
 		},
 	},
-	computed:
+  computed:
 	{
-		/**
-		 * @returns {object} CSS classes for applying/customizing width and height of bar
-		 */
-		classes ()
-		{
-			let classArray = []
+	  /**
+			 * @returns {object} CSS classes for applying/customizing width and height of bar
+			 */
+	  classes ()
+	  {
+	    let classArray = []
 
-			classArray.push(this.tall ? "loading-bar-tall" : "loading-bar-short")
-			classArray.push(this.sizeClass)
+	    classArray.push(this.tall ? "loading-bar-tall" : "loading-bar-short")
+	    classArray.push(this.sizeClass)
 
-			return classArray
-		},
+	    return classArray
+	  },
 
-		/**
-		 * @returns {string} A css class for loading bar length
-		 */
-		sizeClass ()
-		{
-			let prefix = "loading-bar-"
+	  /**
+			 * @returns {string} A css class for loading bar length
+			 */
+	  sizeClass ()
+	  {
+	    let prefix = "loading-bar-"
 
-			switch (this.size)
-			{
-				case "small":
-					return prefix + "sm"
+	    switch (this.size)
+	    {
+	      case "small":
+	        return prefix + "sm"
 
-				case "medium":
-					return prefix + "md"
+	      case "medium":
+	        return prefix + "md"
 
-				case "large":
-					return prefix + "lg"
+	      case "large":
+	        return prefix + "lg"
 
-				default:
-					return prefix + "md"
-			}
-		},
+	      default:
+	        return prefix + "md"
+	    }
+	  },
 	},
 }
 

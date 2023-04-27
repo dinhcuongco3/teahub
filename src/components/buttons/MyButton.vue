@@ -1,39 +1,39 @@
 <template>
-	<button
-		class="my-button-wrapper"
-		:class="classes"
-		:disabled="disabled"
-		:type="submit ? 'submit' : 'button'"
-		@animationend="onShakeEnd()"
-		@click.stop="onClick()"
-	>
-		<div
-			v-if="badgeContent"
-			class="badge"
-		>
-			{{ badgeContent }}
-		</div>
+  <button
+    class="my-button-wrapper"
+    :class="classes"
+    :disabled="disabled"
+    :type="submit ? 'submit' : 'button'"
+    @animationend="onShakeEnd()"
+    @click.stop="onClick()"
+  >
+    <div
+      v-if="badgeContent"
+      class="badge"
+    >
+      {{ badgeContent }}
+    </div>
 
-		<transition
-			name="fade"
-			mode="out-in"
-		>
-			<div
-				:key="transitionKey"
-				ref="slotWrapper"
-			>
-				<Spinner v-if="inProgress" />
-				<div v-else>
-					<slot/>
-					<font-awesome-icon
-						v-if="success"
-						class="check-icon"
-						:icon="['fa', 'check']"
-					/>
-				</div>
-			</div>
-		</transition>
-	</button>
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <div
+        :key="transitionKey"
+        ref="slotWrapper"
+      >
+        <Spinner v-if="inProgress" />
+        <div v-else>
+          <slot/>
+          <font-awesome-icon
+            v-if="success"
+            class="check-icon"
+            :icon="['fa', 'check']"
+          />
+        </div>
+      </div>
+    </transition>
+  </button>
 </template>
 
 <script>
@@ -41,130 +41,130 @@ import Spinner from "components/common/loading/Spinner.vue"
 
 export default
 {
-	name: "MyButton",
-	components: {
-		Spinner,
-	},
-	props:
+  name: "MyButton",
+  components: {
+    Spinner,
+  },
+  props:
 	{
-		active: Boolean, 
+	  active: Boolean, 
 
-		/** Content to show in a badge */
-		badgeContent: String,
+	  /** Content to show in a badge */
+	  badgeContent: String,
 
-		/** Is button disabled */
-		disabled: Boolean,
+	  /** Is button disabled */
+	  disabled: Boolean,
 
-		/** Is button currently doing a job */
-		inProgress: Boolean,
+	  /** Is button currently doing a job */
+	  inProgress: Boolean,
 
-		/** Is button unavailable for action(s) */
-		inactive: Boolean, 
+	  /** Is button unavailable for action(s) */
+	  inactive: Boolean, 
 
-		/** Invert the colors in on a light background */
-		invertColors: Boolean,
+	  /** Invert the colors in on a light background */
+	  invertColors: Boolean,
 
-		/** Whether is a smaller pill button or not */
-		pill: Boolean,
+	  /** Whether is a smaller pill button or not */
+	  pill: Boolean,
 
-		/** Is button for submitting */
-		submit: Boolean,
+	  /** Is button for submitting */
+	  submit: Boolean,
 
-		/** Is button showing success */
-		success: Boolean,
+	  /** Is button showing success */
+	  success: Boolean,
 	},
-	data ()
+  data ()
+  {
+    return {
+      /** Whether button is currently doign a thing locally */
+      doingWork: false,
+
+      /** Tricking vue into redoing a computed ref */
+      isMounted: false,
+
+      /** Whether button is shake animating */
+      shaking: false,
+    }
+  },
+  computed:
 	{
-		return {
-			/** Whether button is currently doign a thing locally */
-			doingWork: false,
+	  /**
+			 * @returns {object} classes -- Object of applied css classes and rules
+			 */
+	  classes ()
+	  {
+	    const classes = {
+	      button: true,
+	    }
+	    classes.active = !this.inactive
+	    classes.disabled = this.disabled || this.inProgress
+	    classes.inactive = this.inactive
+	    classes["invert-colors"] = this.invertColors
+	    classes.pill = this.pill
+	    classes.progress = this.inProgress
+	    classes.success = this.success
+	    classes.shake = this.shaking
 
-			/** Tricking vue into redoing a computed ref */
-			isMounted: false,
+	    return classes
+	  },
 
-			/** Whether button is shake animating */
-			shaking: false,
-		}
+	  /** @returns {string} Just flip the switch in parent to do transitions */
+	  transitionKey () 
+	  {
+	    if (!this.isMounted)
+	    {
+	      return ""
+	    }
+	    let content = this.$refs && this.$refs.slotWrapper ?
+	      this.$refs.slotWrapper.innerHTML : ""
+	    return `${this.inProgress} ${this.success} ${content}`
+	  },
 	},
-	computed:
+  methods:
 	{
-		/**
-		 * @returns {object} classes -- Object of applied css classes and rules
-		 */
-		classes ()
-		{
-			const classes = {
-				button: true,
-			}
-			classes.active = !this.inactive
-			classes.disabled = this.disabled || this.inProgress
-			classes.inactive = this.inactive
-			classes["invert-colors"] = this.invertColors
-			classes.pill = this.pill
-			classes.progress = this.inProgress
-			classes.success = this.success
-			classes.shake = this.shaking
+	  // Begin the shaking animaion
+	  beginShake ()
+	  {
+	    this.shaking = true
+	  },
 
-			return classes
-		},
+	  // The user wants to click the button. Propogate event if button is not disabled.
+	  onClick ()
+	  {
+	    if (this.doingWork) 
+	    {
+	      return
+	    }
+	    this.doingWork = true
 
-		/** @returns {string} Just flip the switch in parent to do transitions */
-		transitionKey () 
-		{
-			if (!this.isMounted)
-			{
-				return ""
-			}
-			let content = this.$refs && this.$refs.slotWrapper ?
-				this.$refs.slotWrapper.innerHTML : ""
-			return `${this.inProgress} ${this.success} ${content}`
-		},
+	    if (this.disabled)
+	    {
+	      // Button is disabled: play animation and send event
+	      this.beginShake()
+	      event.preventDefault()
+	      this.doingWork = false
+	      this.$emit("click-prevented")
+	    }
+	    else
+	    {
+	      // Send click event as normal
+	      this.$emit("click")
+
+	      // Wait for animation
+	      this.doingWork = false
+	    }
+	  },
+
+	  // Reset the shake class so the button can shake again
+	  onShakeEnd ()
+	  {
+	    this.shaking = false
+	  },
 	},
-	methods:
-	{
-		// Begin the shaking animaion
-		beginShake ()
-		{
-			this.shaking = true
-		},
-
-		// The user wants to click the button. Propogate event if button is not disabled.
-		onClick ()
-		{
-			if (this.doingWork) 
-			{
-				return
-			}
-			this.doingWork = true
-
-			if (this.disabled)
-			{
-				// Button is disabled: play animation and send event
-				this.beginShake()
-				event.preventDefault()
-				this.doingWork = false
-				this.$emit("click-prevented")
-			}
-			else
-			{
-				// Send click event as normal
-				this.$emit("click")
-
-				// Wait for animation
-				this.doingWork = false
-			}
-		},
-
-		// Reset the shake class so the button can shake again
-		onShakeEnd ()
-		{
-			this.shaking = false
-		},
-	},
-	mounted ()
-	{
-		this.isMounted = true
-	},
+  mounted ()
+  {
+    this.isMounted = true
+  },
 }
 </script>
 

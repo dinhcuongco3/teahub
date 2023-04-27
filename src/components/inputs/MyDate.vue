@@ -1,180 +1,180 @@
 <template>
-	<div class="my-date-wrapper">
-		<input
-			v-model="localValue"
-			v-if="!isLoading"
-			autocomplete="new-password"
-			class="search-query"
-			:placeholder="placeholder"
-			:maxlength="maxlength"
-			ref="myDate"
-			type="tel"
-			@input="updateParent()"
-			@keypress="isNumber($event)"
-		>
-		<LoadingBar
-			v-else
-			class="search-query loading"
-			size="small"
-		/>
-	</div>
+  <div class="my-date-wrapper">
+    <input
+      v-model="localValue"
+      v-if="!isLoading"
+      autocomplete="new-password"
+      class="search-query"
+      :placeholder="placeholder"
+      :maxlength="maxlength"
+      ref="myDate"
+      type="tel"
+      @input="updateParent()"
+      @keypress="isNumber($event)"
+    >
+    <LoadingBar
+      v-else
+      class="search-query loading"
+      size="small"
+    />
+  </div>
 </template>
 
 <script>
 import LoadingBar from "@/components/common/loading/LoadingBar.vue"
 
 export default {
-	name: "MyDate",
-	components:
+  name: "MyDate",
+  components:
 	{
-		LoadingBar,
+	  LoadingBar,
 	},
-	data: function()
+  data: function()
+  {
+    return {
+      localValue: "",
+    }
+  },
+  props:
 	{
-		return {
-			localValue: "",
-		}
-	},
-	props:
-	{
-		focused: Boolean,
-		isDay: Boolean,
-		isLoading: Boolean,
-		isMonth: Boolean,
-		isYear: Boolean,
-		value:
+	  focused: Boolean,
+	  isDay: Boolean,
+	  isLoading: Boolean,
+	  isMonth: Boolean,
+	  isYear: Boolean,
+	  value:
 		{
-			default: "",
-			required: false,
-			type: String,
-		},
-	},
-	computed:
-	{
-		dateField ()
-		{
-			switch (this.placeholder)
-			{
-				case "dd":
-					return "day"
-
-				case "mm":
-					return "month"
-
-				case "yyyy":
-					return "year"
-
-				default:
-					return ""
-			}
-		},
-
-		/** */
-		isValid ()
-		{
-			if (!this.localValue)
-			{
-				return false
-			}
-
-			if (this.isDay)
-			{
-				if (this.localValue === 0 || this.localValue > 31)
-				{
-					return false
-				}
-				return true
-			}
-			if (this.isMonth)
-			{
-				if (this.localValue === 0 || this.localValue > 12)
-				{
-					return false
-				}
-				return true
-			}
-			if (this.isYear)
-			{
-				if (this.localValue === 0 || this.localValue > 2023)
-				{
-					return false
-				}
-				return true
-			}
-			return false
-		},
-
-		maxlength ()
-		{
-			if (this.placeholder === "yyyy")
-			{
-				return 4
-			}
-			return 2
-		},
-
-		placeholder ()
-		{
-			if (this.isDay)
-			{
-				return "dd"
-			}
-			if (this.isMonth)
-			{
-				return "mm"
-			}
-			if (this.isYear)
-			{
-				return "yyyy"
-			}
-			return ""
+		  default: "",
+		  required: false,
+		  type: String,
 		},
 	},
-	methods:
+  computed:
 	{
-		isNumber (evt)
-		{
-			evt = (evt) ? evt : window.event
-			var charCode = (evt.which) ? evt.which : evt.keyCode
+	  dateField ()
+	  {
+	    switch (this.placeholder)
+	    {
+	      case "dd":
+	        return "day"
 
-			if ((charCode > 31 && (charCode < 48 || charCode > 57)) &&
+	      case "mm":
+	        return "month"
+
+	      case "yyyy":
+	        return "year"
+
+	      default:
+	        return ""
+	    }
+	  },
+
+	  /** */
+	  isValid ()
+	  {
+	    if (!this.localValue)
+	    {
+	      return false
+	    }
+
+	    if (this.isDay)
+	    {
+	      if (this.localValue === 0 || this.localValue > 31)
+	      {
+	        return false
+	      }
+	      return true
+	    }
+	    if (this.isMonth)
+	    {
+	      if (this.localValue === 0 || this.localValue > 12)
+	      {
+	        return false
+	      }
+	      return true
+	    }
+	    if (this.isYear)
+	    {
+	      if (this.localValue === 0 || this.localValue > 2023)
+	      {
+	        return false
+	      }
+	      return true
+	    }
+	    return false
+	  },
+
+	  maxlength ()
+	  {
+	    if (this.placeholder === "yyyy")
+	    {
+	      return 4
+	    }
+	    return 2
+	  },
+
+	  placeholder ()
+	  {
+	    if (this.isDay)
+	    {
+	      return "dd"
+	    }
+	    if (this.isMonth)
+	    {
+	      return "mm"
+	    }
+	    if (this.isYear)
+	    {
+	      return "yyyy"
+	    }
+	    return ""
+	  },
+	},
+  methods:
+	{
+	  isNumber (evt)
+	  {
+	    evt = (evt) ? evt : window.event
+	    var charCode = (evt.which) ? evt.which : evt.keyCode
+
+	    if ((charCode > 31 && (charCode < 48 || charCode > 57)) &&
 				charCode !== 46)
-			{
-				evt.preventDefault()
-			}
-			else
-			{
-				return true
-			}
-		},
+	    {
+	      evt.preventDefault()
+	    }
+	    else
+	    {
+	      return true
+	    }
+	  },
 
-		/** */
-		updateParent ()
-		{
-			this.$emit(
-				"newValue",
-				this.isValid ? this.localValue : ""
-			)
-		},
+	  /** */
+	  updateParent ()
+	  {
+	    this.$emit(
+	      "newValue",
+	      this.isValid ? this.localValue : ""
+	    )
+	  },
 	},
-	watch:
+  watch:
 	{
-		/**
-		 * @param n
-		 */
-		focused (n)
-		{
-			if (n)
-			{
-				this.$refs.myDate.focus()
-				this.$emit("focus", true)
-			}
-		},
+	  /**
+			 * @param n
+			 */
+	  focused (n)
+	  {
+	    if (n)
+	    {
+	      this.$refs.myDate.focus()
+	      this.$emit("focus", true)
+	    }
+	  },
 
-		value (n)
-		{
-			this.localValue = n
-		},
+	  value (n)
+	  {
+	    this.localValue = n
+	  },
 	},
 }
 

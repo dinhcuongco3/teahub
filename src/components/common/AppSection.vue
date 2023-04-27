@@ -1,71 +1,71 @@
 <template>
-	<div
-		class="app-section-wrapper"
-		:class="getClasses()"
-		:style="styles"
-		@click="$emit('click')"
-	>
-		<!-- @slot Use this slot to place the full section content -->
-		<slot />
-	</div>
+  <div
+    class="app-section-wrapper"
+    :class="getClasses()"
+    :style="styles"
+    @click="$emit('click')"
+  >
+    <!-- @slot Use this slot to place the full section content -->
+    <slot />
+  </div>
 </template>
 
 <script>
 export default {
-	name: "AppSection",
-	props:
+  name: "AppSection",
+  props:
 	{
-		/**
-		 * Whether justified center
-		 *
-		 * @since 0.1.0
-		 */
-		centered: Boolean,
+	  /**
+			 * Whether justified center
+			 *
+			 * @since 0.1.0
+			 */
+	  centered: Boolean,
 
-		/**
-		 * Whether the section is showing in a collapsed state or not
-		 *
-		 * @since 0.1.0
-		 */
-		isCollapsed: Boolean,
+	  /**
+			 * Whether the section is showing in a collapsed state or not
+			 *
+			 * @since 0.1.0
+			 */
+	  isCollapsed: Boolean,
 
-		/**
-		 * Whether the section is showing at all or not
-		 *
-		 * @since 0.1.0
-		 */
-		isShowing: Boolean,
+	  /**
+			 * Whether the section is showing at all or not
+			 *
+			 * @since 0.1.0
+			 */
+	  isShowing: Boolean,
 
-		/**
-		 * String of styles to be applied to main wrapper;
-		 *
-		 * @todo Arrange into props and make computed
-		 * @since 0.1.0
-		 */
-		styles:
+	  /**
+			 * String of styles to be applied to main wrapper;
+			 *
+			 * @todo Arrange into props and make computed
+			 * @since 0.1.0
+			 */
+	  styles:
 		{
-			default: "",
-			required: false,
-			type: String,
+		  default: "",
+		  required: false,
+		  type: String,
 		},
 	},
-	methods:
+  methods:
 	{
-		/**
-		 *
-		 * @returns {object} Styles to be applied when in different states;
-		 * @since 0.1.0
-		 * @public
-		 */
-		getClasses ()
-		{
-			return {
-				"centered": this.isShowing && this.centered,
-				"is-collapsed": this.isShowing && this.isCollapsed,
-				"is-hidden": !this.isShowing,
-				"is-showing": this.isShowing && !this.isCollapsed,
-			}
-		},
+	  /**
+			 *
+			 * @returns {object} Styles to be applied when in different states;
+			 * @since 0.1.0
+			 * @public
+			 */
+	  getClasses ()
+	  {
+	    return {
+	      "centered": this.isShowing && this.centered,
+	      "is-collapsed": this.isShowing && this.isCollapsed,
+	      "is-hidden": !this.isShowing,
+	      "is-showing": this.isShowing && !this.isCollapsed,
+	    }
+	  },
 	},
 }
 </script>

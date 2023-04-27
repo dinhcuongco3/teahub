@@ -1,40 +1,40 @@
 <template>
-	<div
-		aria-labelledby="toc-heading"
-		class="toc-wrapper"
-		role="navigation"
-	>
-		<h2 id="toc-heading">
-			Contents
-		</h2>
-		<ol>
-			<li
-				v-for="content in contents"
-				:key="content.id"
-			>
-				<a :href="content.href">
-					{{ content.formatted }}
-				</a>
-			</li>
-		</ol>
-	</div>
+  <div
+    aria-labelledby="toc-heading"
+    class="toc-wrapper"
+    role="navigation"
+  >
+    <h2 id="toc-heading">
+      Contents
+    </h2>
+    <ol>
+      <li
+        v-for="content in contents"
+        :key="content.id"
+      >
+        <a :href="content.href">
+          {{ content.formatted }}
+        </a>
+      </li>
+    </ol>
+  </div>
 </template>
 
 <script>
 
 export default {
-	name: "TableOfContents",
-	data () 
+  name: "TableOfContents",
+  data () 
+  {
+    return {}
+  },
+  props:
 	{
-		return {}
-	},
-	props:
-	{
-		/** All the content to be indexed */
-		contents:
+	  /** All the content to be indexed */
+	  contents:
 		{
-			required: true,
-			type: Array,
+		  required: true,
+		  type: Array,
 		},
 	},
 }

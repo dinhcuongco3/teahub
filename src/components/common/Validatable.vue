@@ -1,30 +1,30 @@
 <template>
-	<div
-		class="validatable"
-		:class="{warn: error}"
-	>
-		<slot/>
-		<transition name="pull-up">
-			<div
-				v-if="error"
-				class="error-message"
-			>
-				^ {{ error }}
-			</div>
-		</transition>
-	</div>
+  <div
+    class="validatable"
+    :class="{warn: error}"
+  >
+    <slot/>
+    <transition name="pull-up">
+      <div
+        v-if="error"
+        class="error-message"
+      >
+        ^ {{ error }}
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
 export default
 {
-	name: "Validatable",
-	props:
+  name: "Validatable",
+  props:
 	{
-		error:
+	  error:
 		{
-			required: true,
-			type: String,
+		  required: true,
+		  type: String,
 		},
 	},
 }

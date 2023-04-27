@@ -1,17 +1,17 @@
 <template>
-	<div class="flex-table-wrapper">
-		<div class="category-section">
-			<slot name="category"/>
-		</div>
-		<div class="content-section">
-			<slot name="content"/>
-		</div>
-	</div>
+  <div class="flex-table-wrapper">
+    <div class="category-section">
+      <slot name="category"/>
+    </div>
+    <div class="content-section">
+      <slot name="content"/>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	name: "FlexTable",
+  name: "FlexTable",
 }
 </script>
 
