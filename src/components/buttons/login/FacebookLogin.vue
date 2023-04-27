@@ -25,9 +25,9 @@ import MyButton from "@/components/buttons/MyButton.vue"
 export default {
   name: "FacebookLogin",
   components:
-	{
-	  MyButton,
-	},
+  {
+    MyButton,
+  },
   data ()
   {
     return {
@@ -35,69 +35,69 @@ export default {
     }
   },
   methods:
-	{
-	  /**
-			 * Use firebase to support logging in with a facebook account
-			 *
-			 * @returns {void}
-			 * @since 0.1.3
-			 */
-	  async facebookLogin ()
-	  {
-	    if (this.isLoggingIn === true)
-	    {
-	      return
-	    }
+  {
+    /**
+     * Use firebase to support logging in with a facebook account
+     *
+     * @returns {void}
+     * @since 0.1.3
+     */
+    async facebookLogin ()
+    {
+      if (this.isLoggingIn === true)
+      {
+        return
+      }
 
-	    this.isLoggingIn = true
-	    /* eslint-disable no-unused-vars */
+      this.isLoggingIn = true
+      /* eslint-disable no-unused-vars */
 
-	    try
-	    {
-	      const auth = getAuth()
+      try
+      {
+        const auth = getAuth()
 
-	      // Configure for facebook
-	      const provider = new FacebookAuthProvider()
-	      provider.addScope("user_birthday")
-	      provider.setCustomParameters({
-	        "display": "popup",
-	      })
+        // Configure for facebook
+        const provider = new FacebookAuthProvider()
+        provider.addScope("user_birthday")
+        provider.setCustomParameters({
+          "display": "popup",
+        })
 
-	      const response = await signInWithPopup(auth, provider)
-	      // The signed-in user info.
-	      const user = response.user
-	      // This gives you a Facebook Access Token.
-	      const credential = FacebookAuthProvider.credentialFromResult(response)
-	      const token = credential.accessToken
+        const response = await signInWithPopup(auth, provider)
+        // The signed-in user info.
+        const user = response.user
+        // This gives you a Facebook Access Token.
+        const credential = FacebookAuthProvider.credentialFromResult(response)
+        const token = credential.accessToken
 
-	      // Update store
-	      this.$store.dispatch("fetchUser", user)
+        // Update store
+        this.$store.dispatch("fetchUser", user)
 
-	      this.$router.push({
-	        path: "/",
-	      })
-	    }
-	    catch (error)
-	    {
-	      const errorCode = error.code
-	      const errorMessage = error.message
+        this.$router.push({
+          path: "/",
+        })
+      }
+      catch (error)
+      {
+        const errorCode = error.code
+        const errorMessage = error.message
 
-	      // The email of the user's account used.
-	      const email = error.email
+        // The email of the user's account used.
+        const email = error.email
 
-	      // The AuthCredential type that was used.
-	      const credential = FacebookAuthProvider.credentialFromError(error)
-	      console.error(errorMessage)
-	    }
-	    /* eslint-enable no-unused-vars */
-	    this.isLoggingIn = false
-	  },
-	},
+        // The AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error)
+        console.error(errorMessage)
+      }
+      /* eslint-enable no-unused-vars */
+      this.isLoggingIn = false
+    },
+  },
 }
 </script>
 
 <style lang='less'>
 .svg-wrapper {
-	
+  
 }
 </style>

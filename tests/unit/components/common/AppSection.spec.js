@@ -12,9 +12,9 @@ describe("AppSection Component", () =>
       {
         propsData: {},
         slots:
-				{
-				  default: "<div class=\"fake-section-content\"></div>",
-				},
+        {
+          default: "<div class=\"fake-section-content\"></div>",
+        },
       }
     )
   })

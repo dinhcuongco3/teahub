@@ -34,9 +34,9 @@ import Endorsement from "components/anchors/endorsements/Endorsement"
 export default {
   name: "Endorsements",
   components:
-	{
-	  Endorsement,
-	},
+  {
+    Endorsement,
+  },
   props: {
     endorsers: {
       required: true,

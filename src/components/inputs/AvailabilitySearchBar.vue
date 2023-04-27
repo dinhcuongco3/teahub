@@ -51,71 +51,71 @@ import DateSelector from "@/components/inputs/DateSelector.vue"
 export default {
   name: "AvailabilitySearchBar",
   components:
-	{
-	  DateSelector,
-	},
+  {
+    DateSelector,
+  },
   data: function()
   {
     return {}
   },
   props:
-	{
-	  /** Selected end date for the calendar */
-	  end:
-		{
-		  default: "",
-		  required: false,
-		  type: String,
-		},
+  {
+    /** Selected end date for the calendar */
+    end:
+    {
+      default: "",
+      required: false,
+      type: String,
+    },
 
-	  /** Whether we are in loading state or not */
-	  isLoading: Boolean,
+    /** Whether we are in loading state or not */
+    isLoading: Boolean,
 
-	  /** Selected start date for the calendar */
-	  start:
-		{
-		  default: "",
-		  required: false,
-		  type: String,
-		},
-	},
+    /** Selected start date for the calendar */
+    start:
+    {
+      default: "",
+      required: false,
+      type: String,
+    },
+  },
   computed:
-	{
-	  /**
-			 * @returns {string} The max date the user can book out too
-			 */
-	  maxDate () 
-	  {
-	    // Eighteen months in the future
-	    let jump18 = DateTime.local().plus({
-	      years: 1,
-	      months: 6,
-	    })
-	    return jump18.toFormat("yyyy-MM-dd")
-	  },
+  {
+    /**
+     * @returns {string} The max date the user can book out too
+     */
+    maxDate () 
+    {
+      // Eighteen months in the future
+      let jump18 = DateTime.local().plus({
+        months: 6,
+        years: 1,
+      })
+      return jump18.toFormat("yyyy-MM-dd")
+    },
 
-	  minDateEnd () 
-	  {
-	    return this.today
-	  },
+    minDateEnd () 
+    {
+      return this.today
+    },
 
-	  today ()
-	  {
-	    return DateTime.local().toFormat("yyyy-MM-dd")
-	  },
-	},
+    today ()
+    {
+      return DateTime.local().toFormat("yyyy-MM-dd")
+    },
+  },
   methods:
-	{
-	  updateEndDate (v)
-	  {
-	    this.$emit("updateEndDate", v)
-	  },
+  {
+    updateEndDate (v)
+    {
+      this.$emit("updateEndDate", v)
+    },
 
-	  updateStartDate (v)
-	  {
-	    this.$emit("updateStartDate", v)
-	  },
-	},
+    updateStartDate (v)
+    {
+      this.$emit("updateStartDate", v)
+    },
+  },
 }
 </script>
 
@@ -123,39 +123,39 @@ export default {
 @import "../../../assets/styles/styles";
 
 .availability-search-bar-wrapper {
-	width: 100%;
+  width: 100%;
 
-	.date-container {
-		align-content: center;
-		display: flex;
-		gap: 10px;
-		justify-content: center;
-		width: 100%;
+  .date-container {
+    align-content: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
 
-		.flex-box {
-			background: @color-focus;
-			border: 1px solid @color-purple;
-			border-radius: 5px;
-			padding: 7px;
-			align-content: center;
-			align-items: center;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			width: 100%;
+    .flex-box {
+      background: @color-focus;
+      border: 1px solid @color-purple;
+      border-radius: 5px;
+      padding: 7px;
+      align-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
 
-			.label {
-				font-weight: 700;
-				margin-bottom: 2px;
-			}
-		}
-	}
+      .label {
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+    }
+  }
 
-	.fade-enter-active, .fade-leave-active {
-		transition: opacity .2s;
-	}
-	.fade-enter, .fade-leave-to {
-		opacity: 0;
-	}
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 }
 </style>

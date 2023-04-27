@@ -33,24 +33,24 @@ import MyButton from "@/components/buttons/MyButton.vue"
 export default {
   name: "BookButton",
   components: 
-	{
-	  MyButton,
-	},
+  {
+    MyButton,
+  },
   props:
-	{
-	  /** Whether the button is disabled or not */
-	  disabled: Boolean,
+  {
+    /** Whether the button is disabled or not */
+    disabled: Boolean,
 
-	  /** Whether we are in loading state or not */
-	  isLoading: Boolean,
+    /** Whether we are in loading state or not */
+    isLoading: Boolean,
 
-	  /** The total price of the booked stay */
-	  totalPrice: {
-	    default: "",
-	    required: false,
-	    type: String,
-	  },
-	},
+    /** The total price of the booked stay */
+    totalPrice: {
+      default: "",
+      required: false,
+      type: String,
+    },
+  },
   computed: {
     bookingText ()
     {
@@ -72,23 +72,23 @@ export default {
 @import "../../../../assets/styles/styles";
 
 .search-execute {
-	background-color: @color-pastel-blue !important;
-	height: 50px;
-	margin-bottom: 11px;
-	margin-top: 5px;
-	max-width: min(98%, 660px);
-	padding: 3px;
+  background-color: @color-pastel-blue !important;
+  height: 50px;
+  margin-bottom: 11px;
+  margin-top: 5px;
+  max-width: min(98%, 660px);
+  padding: 3px;
 
-	.execute-text {
-		margin: auto;
-	}
+  .execute-text {
+    margin: auto;
+  }
 }
 
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .2s;
+  transition: opacity .2s;
 }
 .fade-enter, .fade-leave-to {
-	opacity: 0;
+  opacity: 0;
 }
 
 </style>

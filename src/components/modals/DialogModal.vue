@@ -41,9 +41,9 @@ import MyButton from "components/buttons/MyButton"
 export default {
   name: "DialogModal",
   components:
-	{
-	  MyButton,
-	},
+  {
+    MyButton,
+  },
   props: {
     backgroundColor: {
       default: "#FFFFFF",
@@ -85,62 +85,62 @@ export default {
 
 <style>
 .dialog-modal {
-	align-items: center;
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	left: 0;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 9999;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .dialog-overlay {
-	background-color: rgba(0, 0, 0, 0.5);
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .dialog-content {
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	max-width: 440px;
-	padding: 20px;
-	position: relative;
-	z-index: 1;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 440px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .dialog-header {
-	border-radius: 5px 5px 0 0;
-	color: #FFFFFF;
-	font-weight: bold;
-	margin-bottom: 20px;
+  border-radius: 5px 5px 0 0;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 .dialog-body {
-	color: #FFFFFF;
-	font-weight: 600;
-	margin: 0;
-	padding: 0;
+  color: #FFFFFF;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
 }
 .dialog-footer {
-	background-color: #2196F3;
-	border-radius: 0 0 5px 5px;
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
-	padding: 10px 20px;
+  background-color: #2196F3;
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding: 10px 20px;
 
-	.dialog-button {
-		border: 2px solid #2196F3;
-		border-radius: 5px;
-		cursor: pointer;
-		margin-left: 10px;
-		padding: 10px 20px;
-		transition: all 0.2s ease-in-out;
-	}
+  .dialog-button {
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+  }
 }
 </style>

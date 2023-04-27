@@ -13,14 +13,14 @@ import {DateTime} from "luxon"
 export default {
   name: "Copyright",
   computed:
-	{
-	  /**
-			 * @returns {string} Year in yyyy format
-			 */
-	  formattedYear ()
-	  {
-	    return DateTime.local().toFormat("yyyy")
-	  },
-	},
+  {
+    /**
+     * @returns {string} Year in yyyy format
+     */
+    formattedYear ()
+    {
+      return DateTime.local().toFormat("yyyy")
+    },
+  },
 }
 </script>

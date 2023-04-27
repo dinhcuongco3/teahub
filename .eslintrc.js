@@ -4,11 +4,15 @@ module.exports = {
     "jest": true,
     node: true,
   },
+  "globals": {
+    "vi": true,
+  },
+
   "extends": [
-	  "plugin:vue/essential",
-	  "plugin:jsdoc/recommended",
-	  "eslint:recommended",
-	  "plugin:storybook/recommended",
+    "plugin:vue/essential",
+    "plugin:jsdoc/recommended",
+    "eslint:recommended",
+    "plugin:storybook/recommended",
   ],
   "overrides": [
     // Apply custom .vue files extension rules
@@ -76,13 +80,13 @@ module.exports = {
         ],
         // Does not currently support Allman style
         // "vue/script-indent": [
-        //	"error",
-        //	"tab",
-        //	{
-        //		"baseIndent": 0,
-        //		"ignores": [],
-        //		"switchCase": 1,
-        //	}
+        //  "error",
+        //  "tab",
+        //  {
+        //    "baseIndent": 0,
+        //    "ignores": [],
+        //    "switchCase": 1,
+        //  }
         // ],
         "vue/singleline-html-element-content-newline": [
           "error",

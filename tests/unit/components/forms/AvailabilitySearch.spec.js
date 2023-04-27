@@ -147,7 +147,7 @@ describe("AvailabilitySearch Component", () =>
   it.concurrent("processes date selection correctly", () => 
   {
     let isolatedWrapper = createWrapper()
-	 
+   
     const selectedDate = "2023-05-10T08:00:00.000Z"
     const expectedStartDate = "2023-05-10"
 

@@ -15,9 +15,9 @@ import MyButton from "components/buttons/MyButton"
 export default {
   name: "MyFilter",
   components:
-	{
-	  MyButton,
-	},
+  {
+    MyButton,
+  },
   props: {
     /** Is current filter being applied */
     inactive: Boolean,

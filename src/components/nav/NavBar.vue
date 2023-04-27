@@ -66,72 +66,72 @@ import store from "@/store/store.js"
 export default {
   name: "NavBar",
   computed:
-	{
-	  /**
-			 * @returns {string} - Users first name if loaded; Else empty string
-			 */
-	  firstName ()
-	  {
-	    return store.state.user.user.firstName || ""
-	  },
+  {
+    /**
+     * @returns {string} - Users first name if loaded; Else empty string
+     */
+    firstName ()
+    {
+      return store.state.user.user.firstName || ""
+    },
 
-	  /**
-			 * @returns {boolean} - Whether the app is initializing the user or not
-			 */
-	  isLoadingData ()
-	  {
-	    return store.state.user.isLoggingIn
-	  },
+    /**
+     * @returns {boolean} - Whether the app is initializing the user or not
+     */
+    isLoadingData ()
+    {
+      return store.state.user.isLoggingIn
+    },
 
-	  /**
-			 * @returns {boolean} - Whether a user is logged in or not
-			 */
-	  isLoggedIn ()
-	  {
-	    return store.state.user.isLoggedIn
-	  },
+    /**
+     * @returns {boolean} - Whether a user is logged in or not
+     */
+    isLoggedIn ()
+    {
+      return store.state.user.isLoggedIn
+    },
 
-	  /**
-			 * @returns {string} - Users last name if loaded; Else empty string
-			 */
-	  lastName ()
-	  {
-	    return store.state.user.user.lastName || ""
-	  },
+    /**
+     * @returns {string} - Users last name if loaded; Else empty string
+     */
+    lastName ()
+    {
+      return store.state.user.user.lastName || ""
+    },
 
-	  /**
-			 * @returns {string} - Users initials to be displayed; Else dash
-			 */
-	  userInitials ()
-	  {
-	    const first = this.firstName.length ? this.firstName[0].toUpperCase() : ""
-	    const last = this.lastName.length ? this.lastName[0].toUpperCase() : ""
-	    return (first + last) || "-"
-	  },
-	},
+    /**
+     * @returns {string} - Users initials to be displayed; Else dash
+     */
+    userInitials ()
+    {
+      const first = this.firstName.length ? this.firstName[0].toUpperCase() : ""
+      const last = this.lastName.length ? this.lastName[0].toUpperCase() : ""
+      return (first + last) || "-"
+    },
+  },
   methods:
-	{
-	  /**
-			 * Logout the current user and remove the user session
-			 *
-			 * @returns {void}
-			 */
-	  async logout ()
-	  {
-	    try
-	    {
-	      const auth = getAuth()
-	      await signOut(auth)
-	    }
-	    catch (error)
-	    {
-	      console.error(
-	        error
-	      )
-	    }
-	    store.dispatch("logoutUser")
-	  },
-	},
+  {
+    /**
+     * Logout the current user and remove the user session
+     *
+     * @returns {void}
+     */
+    async logout ()
+    {
+      try
+      {
+        const auth = getAuth()
+        await signOut(auth)
+      }
+      catch (error)
+      {
+        console.error(
+          error
+        )
+      }
+      store.dispatch("logoutUser")
+    },
+  },
 }
 </script>
 
@@ -140,57 +140,57 @@ export default {
 
 /* @todo setup a main file and set margins/padding there probably */
 .nav-wrapper {
-	@v-padding: 30px;
-	align-content: center;
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	padding: 10px;
-	padding-bottom: @v-padding;
-	padding-top: @v-padding;
-	position: relative;
-	width: 100%;
+  @v-padding: 30px;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 10px;
+  padding-bottom: @v-padding;
+  padding-top: @v-padding;
+  position: relative;
+  width: 100%;
 
-	.nav-items {
-		flex-grow: 1;
+  .nav-items {
+    flex-grow: 1;
 
-		.nav-item {
-			margin: 5px;
-		}
-	}
-	.user-items {
-		border: 1px solid @myblack;
-		border-radius: 50px;
-		display: flex;
-		flex-direction: column;
-		flex-grow: 0;
-		flex-shrink: 1;
+    .nav-item {
+      margin: 5px;
+    }
+  }
+  .user-items {
+    border: 1px solid @myblack;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 1;
 
-		&.options-guest {
-			border: none;
-		}
-		.user-item {
-			margin: 3px;
-			margin-left: 6px;
-			margin-right: 6px;
-		}
+    &.options-guest {
+      border: none;
+    }
+    .user-item {
+      margin: 3px;
+      margin-left: 6px;
+      margin-right: 6px;
+    }
 
-		.user-action {
-			border-top: 1px solid @myblack;
-			margin-bottom: 5px;
-		}
-		.user-name {
-			margin-top: 5px;
-		}
-	}
+    .user-action {
+      border-top: 1px solid @myblack;
+      margin-bottom: 5px;
+    }
+    .user-name {
+      margin-top: 5px;
+    }
+  }
 }
 a {
-	font-weight: bold;
-	color: #2c3e50;
+  font-weight: bold;
+  color: #2c3e50;
 }
 a.router-link-exact-active {
-	color: #42b983;
+  color: #42b983;
 }
 </style>

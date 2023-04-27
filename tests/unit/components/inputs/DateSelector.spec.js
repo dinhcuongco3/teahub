@@ -22,7 +22,7 @@ describe("DateSelector.vue", () =>
     let now = DateTime.local(2023, 4, 26).toMillis()
     Settings.now = () => now
     Settings.defaultZoneName = "America/New_York"
-	 vi.setSystemTime(now)
+    vi.setSystemTime(now)
   })
 
   it("renders three MyDate components", () => 
@@ -91,24 +91,24 @@ describe("DateSelector.vue", () =>
 
   it("shows the correct error message when the date is too far in the future", async () => 
   {
-		 const monthInput = wrapper.findComponent({
+    const monthInput = wrapper.findComponent({
       ref: "month", 
     })
-		 const dayInput = wrapper.findComponent({
+    const dayInput = wrapper.findComponent({
       ref: "day", 
     })
-		 const yearInput = wrapper.findComponent({
+    const yearInput = wrapper.findComponent({
       ref: "year", 
     })
 
-		 await monthInput.vm.$emit("newValue", "06")
-		 await dayInput.vm.$emit("newValue", "01")
-		 await yearInput.vm.$emit("newValue", "2024") // Date beyond maxDate (2023-05-31)
+    await monthInput.vm.$emit("newValue", "06")
+    await dayInput.vm.$emit("newValue", "01")
+    await yearInput.vm.$emit("newValue", "2024") // Date beyond maxDate (2023-05-31)
 
-		 expect(wrapper.vm.displayedError).toBe("Too far in the future")
+    expect(wrapper.vm.displayedError).toBe("Too far in the future")
   })
 
-	  it("updates the month value and focuses on the day input", async () => 
+  it("updates the month value and focuses on the day input", async () => 
   {
     const monthInput = wrapper.findComponent({
       ref: "month", 

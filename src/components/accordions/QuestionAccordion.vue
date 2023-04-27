@@ -24,9 +24,9 @@ import Accordion from "components/common/Accordion"
 export default {
   name: "QuestionAccordion",
   components:
-	{
-	  Accordion,
-	},
+  {
+    Accordion,
+  },
 }
 </script>
 
@@ -35,26 +35,26 @@ export default {
 @size: max(65vw, 300px);
 
 .question-accordion-wrapper {
-	margin: 0;
-	max-width: @size;
-	padding: 0;
+  margin: 0;
+  max-width: @size;
+  padding: 0;
 
-	.accordion-section {
-		margin-bottom: 7px;
-		margin-top: 7px;
+  .accordion-section {
+    margin-bottom: 7px;
+    margin-top: 7px;
 
-		h2 {
-			font-size: clamp(15px, 1em, 25px);
-			margin-bottom: 0px;
-			margin-top: 0px;
-		}
-		.accordion-content {
-			text-align: left;
-			padding-bottom: 7px;
-			padding-left: 17px;
-			padding-right: 17px;
-			padding-top: 7px;
-		}
-	}
+    h2 {
+      font-size: clamp(15px, 1em, 25px);
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+    .accordion-content {
+      text-align: left;
+      padding-bottom: 7px;
+      padding-left: 17px;
+      padding-right: 17px;
+      padding-top: 7px;
+    }
+  }
 }
 </style>

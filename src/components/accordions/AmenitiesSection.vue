@@ -70,73 +70,73 @@ import FlexTable from "components/common/FlexTable"
 export default {
   name: "AmenitiesSection",
   components:
-	{
-	  Accordion,
-	  FlexTable,
-	},
+  {
+    Accordion,
+    FlexTable,
+  },
   props:
-	{
-	  /** Different kind of amenities; E.g. washer, dryer, tea kettle */
-	  amenities: {
-	    default: () => [],
-	    required: true,
-	    type: Array,
-	  },
-	},
+  {
+    /** Different kind of amenities; E.g. washer, dryer, tea kettle */
+    amenities: {
+      default: () => [],
+      required: true,
+      type: Array,
+    },
+  },
   computed:
-	{
-	  /**
-			 * @example
-			 * // returns [{title: 'Axe body spray'}, {title: 'Baby Wipes'} }]
-			 * @returns {Array} Sorted by amenitie title
-			 */
-	  sortedAmenities ()
-	  {
-	    let sortThis = this.amenities || []
-	    return sortThis.sort( (a, b) => 
-	    {
-	      const A = a.title || ""
-	      const B = b.title || ""
-	      A.localeCompare(B)
-	    })
-	  },
-	},
+  {
+    /**
+     * @example
+     * // returns [{title: 'Axe body spray'}, {title: 'Baby Wipes'} }]
+     * @returns {Array} Sorted by amenitie title
+     */
+    sortedAmenities ()
+    {
+      let sortThis = this.amenities || []
+      return sortThis.sort( (a, b) => 
+      {
+        const A = a.title || ""
+        const B = b.title || ""
+        A.localeCompare(B)
+      })
+    },
+  },
   methods:
-	{
-	  /**
-			 * @param {string} detail - Json key associated with 
-			 * @returns {string} Properly formatted title
-			 */
-	  formatTitle (detail) 
-	  {
-	    // Replace underscores and make all lowercase
-	    let title = detail.replace(/_/g, " ").toLowerCase()
+  {
+    /**
+     * @param {string} detail - Json key associated with 
+     * @returns {string} Properly formatted title
+     */
+    formatTitle (detail) 
+    {
+      // Replace underscores and make all lowercase
+      let title = detail.replace(/_/g, " ").toLowerCase()
 
-	    // Capitalize the first letter
-	    title = title.charAt(0).toUpperCase() + title.slice(1)
-	    return title
-	  },
+      // Capitalize the first letter
+      title = title.charAt(0).toUpperCase() + title.slice(1)
+      return title
+    },
 
-	  /**
-			 * @param {object} amenitieObj - Amenitie object via json data
-			 * @returns {Array} List of the custom amenities for said object
-			 */
-	  getDetails (amenitieObj) 
-	  {
-	    // These are handled elsewhere 
-	    const EXCLUDED = [
-	      "id",
-	      "title",
-	      "year",
-	      "model",
-	      "brand",
-	    ]
-	    return Object.keys(amenitieObj).filter((detail) => 
-	    {
-	      return ! EXCLUDED.includes(detail.toLowerCase())
-	    })
-	  },
-	},
+    /**
+     * @param {object} amenitieObj - Amenitie object via json data
+     * @returns {Array} List of the custom amenities for said object
+     */
+    getDetails (amenitieObj) 
+    {
+      // These are handled elsewhere 
+      const EXCLUDED = [
+        "id",
+        "title",
+        "year",
+        "model",
+        "brand",
+      ]
+      return Object.keys(amenitieObj).filter((detail) => 
+      {
+        return ! EXCLUDED.includes(detail.toLowerCase())
+      })
+    },
+  },
 }
 </script>
 
@@ -144,15 +144,15 @@ export default {
 @import "../../../../assets/styles/styles";
 
 .amenities-section {
-	border: 1px solid @myblack;
-	border-radius: 7px;
-	max-width: 500px;
-	width: 96%;
+  border: 1px solid @myblack;
+  border-radius: 7px;
+  max-width: 500px;
+  width: 96%;
 
-	h2 {
-		font-size: 25px;
-		margin-bottom: 0px;
-		margin-top: 0px;
-	}
+  h2 {
+    font-size: 25px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
 }
 </style>

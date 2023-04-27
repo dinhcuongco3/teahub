@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils"
 import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar.vue"
-import DateSelector from "@/components/inputs/DateSelector.vue"
 import {DateTime} from "luxon"
 import {Settings} from "luxon"
 
@@ -85,16 +84,16 @@ describe("AvailabilitySearchBar Component", () =>
     ])
   })
 
-  it("calls updateEndDate when the end date selector emits newDate", async () => 
+  it("calls updateEndDate when the end date selector emits newDate", () => 
   {
     const endSpy = vi.spyOn(wrapper.vm, "updateEndDate")
     const startSpy = vi.spyOn(wrapper.vm, "updateStartDate")
 
-	  wrapper.vm.updateEndDate()
+    wrapper.vm.updateEndDate()
     expect(endSpy).toHaveBeenCalled()
     expect(endSpy).toHaveBeenCalledWith()
 
-	  wrapper.vm.updateStartDate()
+    wrapper.vm.updateStartDate()
     expect(startSpy).toHaveBeenCalled()
     expect(startSpy).toHaveBeenCalledWith()
   })
