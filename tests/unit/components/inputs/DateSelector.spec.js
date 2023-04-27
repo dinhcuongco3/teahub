@@ -235,7 +235,7 @@ describe("DateSelector.vue", () =>
 			"",
 		])
 	})
-	it("foo", async () => 
+	it("Watches the value and updates local values accordingly", async () => 
 	{
 		await wrapper.setProps({
 			value: "2023-04-30",
