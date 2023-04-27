@@ -1,8 +1,8 @@
 import { mount } from "@vue/test-utils"
 import AvailabilitySearchBar from "@/components/inputs/AvailabilitySearchBar.vue"
 import DateSelector from "@/components/inputs/DateSelector.vue"
-import {DateTime} from 'luxon'
-import {Settings} from 'luxon'
+import {DateTime} from "luxon"
+import {Settings} from "luxon"
 
 describe("AvailabilitySearchBar Component", () => 
 {
@@ -19,7 +19,7 @@ describe("AvailabilitySearchBar Component", () =>
 		// Preset the date for all tests
 		let now = DateTime.local(2023, 4, 26).toMillis()
 		Settings.now = () => now
-		Settings.defaultZoneName = 'America/New_York'
+		Settings.defaultZoneName = "America/New_York"
 	})
 
 	it("renders in general", () => 
@@ -34,13 +34,13 @@ describe("AvailabilitySearchBar Component", () =>
 
 	it("renders computed dates", () => 
 	{
-      expect(wrapper.vm.maxDate).toBeDefined();
-      expect(wrapper.vm.minDateEnd).toBeDefined();
-      expect(wrapper.vm.today).toBeDefined();
+		expect(wrapper.vm.maxDate).toBeDefined()
+		expect(wrapper.vm.minDateEnd).toBeDefined()
+		expect(wrapper.vm.today).toBeDefined()
 
-      expect(wrapper.vm.maxDate).toEqual("2024-10-26")
-      expect(wrapper.vm.minDateEnd).toEqual("2023-04-26")
-      expect(wrapper.vm.today).toEqual("2023-04-26")
+		expect(wrapper.vm.maxDate).toEqual("2024-10-26")
+		expect(wrapper.vm.minDateEnd).toEqual("2023-04-26")
+		expect(wrapper.vm.today).toEqual("2023-04-26")
 	})
 
 	it("renders a loading state", async () => 
@@ -70,27 +70,32 @@ describe("AvailabilitySearchBar Component", () =>
 
 	it("emits the appropriate events", async () => 
 	{
-     const testDate = '2023-05-01';
+		const testDate = "2023-05-01"
 
-     await wrapper.vm.updateStartDate(testDate);
-     await wrapper.vm.updateEndDate(testDate);
+		await wrapper.vm.updateStartDate(testDate)
+		await wrapper.vm.updateEndDate(testDate)
 
-     expect(wrapper.emitted('updateStartDate')).toBeTruthy();
-     expect(wrapper.emitted('updateEndDate')).toBeTruthy();
-     expect(wrapper.emitted('updateStartDate')[0]).toEqual([testDate]);
-     expect(wrapper.emitted('updateEndDate')[0]).toEqual([testDate]);
+		expect(wrapper.emitted("updateStartDate")).toBeTruthy()
+		expect(wrapper.emitted("updateEndDate")).toBeTruthy()
+		expect(wrapper.emitted("updateStartDate")[0]).toEqual([
+			testDate,
+		])
+		expect(wrapper.emitted("updateEndDate")[0]).toEqual([
+			testDate,
+		])
 	})
 
-  it('calls updateEndDate when the end date selector emits newDate', async () => {
-    const endSpy = vi.spyOn(wrapper.vm, 'updateEndDate')
-    const startSpy = vi.spyOn(wrapper.vm, 'updateStartDate')
+	it("calls updateEndDate when the end date selector emits newDate", async () => 
+	{
+		const endSpy = vi.spyOn(wrapper.vm, "updateEndDate")
+		const startSpy = vi.spyOn(wrapper.vm, "updateStartDate")
 
 	  wrapper.vm.updateEndDate()
-    expect(endSpy).toHaveBeenCalled()
-    expect(endSpy).toHaveBeenCalledWith()
+		expect(endSpy).toHaveBeenCalled()
+		expect(endSpy).toHaveBeenCalledWith()
 
 	  wrapper.vm.updateStartDate()
-    expect(startSpy).toHaveBeenCalled()
-    expect(startSpy).toHaveBeenCalledWith()
- });
+		expect(startSpy).toHaveBeenCalled()
+		expect(startSpy).toHaveBeenCalledWith()
+	})
 })

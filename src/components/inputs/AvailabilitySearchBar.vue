@@ -12,7 +12,7 @@
 					>
 						Start Date
 					</span>
-						<!-- /* c8 ignore next 7 */ -->
+					<!-- /* c8 ignore next 7 */ -->
 					<DateSelector
 						data-testid="date-selector-start"
 						:isLoading="isLoading"
@@ -29,7 +29,7 @@
 					>
 						End Date
 					</span>
-						<!-- /* c8 ignore next 7 */ -->
+					<!-- /* c8 ignore next 7 */ -->
 					<DateSelector
 						data-testid="date-selector-end"
 						:isLoading="isLoading"
@@ -82,12 +82,15 @@ export default {
 	computed:
 	{
 		/**
-		 * @return {string} The max date the user can book out too
+		 * @returns {string} The max date the user can book out too
 		 */
 		maxDate () 
 		{
 			// Eighteen months in the future
-			let jump18 = DateTime.local().plus({years: 1, months: 6})
+			let jump18 = DateTime.local().plus({
+				years: 1,
+				months: 6,
+			})
 			return jump18.toFormat("yyyy-MM-dd")
 		},
 

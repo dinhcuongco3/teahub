@@ -1,9 +1,13 @@
 import { mount } from "@vue/test-utils"
 import {DateTime} from "luxon"
-import {Settings} from 'luxon'
+import {Settings} from "luxon"
 import AvailabilitySearch from "@/components/forms/AvailabilitySearch.vue"
 
-function createWrapper() {
+/**
+ *
+ */
+function createWrapper () 
+{
 	let wrapper = mount(
 		AvailabilitySearch,
 		{
@@ -13,7 +17,7 @@ function createWrapper() {
 					"BookButton",
 					"VueCal",
 				],
-			}
+			},
 		}
 	)
 	return wrapper
@@ -26,9 +30,9 @@ describe("AvailabilitySearch Component", () =>
 	{
 		// Preset the date for all tests
 		let now = DateTime.local(2023, 4, 26)
-		let rezoned = now.setZone("America/Los_Angeles").toMillis();
+		let rezoned = now.setZone("America/Los_Angeles").toMillis()
 		Settings.now = () => rezoned
-		Settings.defaultZoneName = 'America/Los_Angeles'
+		Settings.defaultZoneName = "America/Los_Angeles"
 		vi.setSystemTime(rezoned)
 
 		wrapper = createWrapper()
@@ -77,51 +81,78 @@ describe("AvailabilitySearch Component", () =>
 		}
 	})
 
-  it.concurrent('displays the AvailabilitySearchBar component', () => {
-    expect(wrapper.findComponent({ name: 'AvailabilitySearchBar' }).exists()).toBe(true);
-  });
+	it.concurrent("displays the AvailabilitySearchBar component", () => 
+	{
+		expect(wrapper.findComponent({
+			name: "AvailabilitySearchBar", 
+		}).exists()).toBe(true)
+	})
 
-  it.concurrent('displays the VueCal component', () => {
-    expect(wrapper.findComponent({ name: 'VueCal' }).exists()).toBe(true);
-  });
+	it.concurrent("displays the VueCal component", () => 
+	{
+		expect(wrapper.findComponent({
+			name: "VueCal", 
+		}).exists()).toBe(true)
+	})
 
-  it.concurrent('displays the BookButton component', () => {
-    expect(wrapper.findComponent({ name: 'BookButton' }).exists()).toBe(true);
-  });
+	it.concurrent("displays the BookButton component", () => 
+	{
+		expect(wrapper.findComponent({
+			name: "BookButton", 
+		}).exists()).toBe(true)
+	})
 
-  it.concurrent('displays the correct minDate', () => {
-    expect(wrapper.vm.minDate).toBe("2023-04-26");
-  });
+	it.concurrent("displays the correct minDate", () => 
+	{
+		expect(wrapper.vm.minDate).toBe("2023-04-26")
+	})
 
-  it.concurrent('calculates the correct totalDays', async () => {
-    const startDate = '2023-05-01';
-    const endDate = '2023-05-05';
+	it.concurrent("calculates the correct totalDays", async () => 
+	{
+		const startDate = "2023-05-01"
+		const endDate = "2023-05-05"
 
-    await wrapper.setData({ selectedDates: [{ start: startDate, end: endDate }] });
+		await wrapper.setData({
+			selectedDates: [
+				{
+					start: startDate,
+					end: endDate, 
+				},
+			], 
+		})
 
-    expect(wrapper.vm.totalDays).toBe(5);
-  });
+		expect(wrapper.vm.totalDays).toBe(5)
+	})
 
-  it.concurrent('calculates the correct totalPrice', async () => {
-    const startDate = '2023-05-01';
-    const endDate = '2023-05-05';
-    const dailyRate = 85;
-    const cleaningFee = 100;
-    const expectedTotalPrice = ((5 * dailyRate) + cleaningFee) + "";
+	it.concurrent("calculates the correct totalPrice", async () => 
+	{
+		const startDate = "2023-05-01"
+		const endDate = "2023-05-05"
+		const dailyRate = 85
+		const cleaningFee = 100
+		const expectedTotalPrice = ((5 * dailyRate) + cleaningFee) + ""
 
-    await wrapper.setData({ selectedDates: [{ start: startDate, end: endDate }] });
+		await wrapper.setData({
+			selectedDates: [
+				{
+					start: startDate,
+					end: endDate, 
+				},
+			], 
+		})
 
-    expect(wrapper.vm.totalPrice).toBe(expectedTotalPrice);
-  });
+		expect(wrapper.vm.totalPrice).toBe(expectedTotalPrice)
+	})
 
-  it.concurrent('processes date selection correctly', () => {
+	it.concurrent("processes date selection correctly", () => 
+	{
 		let isolatedWrapper = createWrapper()
 	 
-    const selectedDate = '2023-05-10T08:00:00.000Z'
-    const expectedStartDate = '2023-05-10';
+		const selectedDate = "2023-05-10T08:00:00.000Z"
+		const expectedStartDate = "2023-05-10"
 
-    expect(isolatedWrapper.vm.processDateSelection(selectedDate)).toBe(true);
-    expect(isolatedWrapper.vm.selectedDates[0].start).toBe(expectedStartDate);
-  });
+		expect(isolatedWrapper.vm.processDateSelection(selectedDate)).toBe(true)
+		expect(isolatedWrapper.vm.selectedDates[0].start).toBe(expectedStartDate)
+	})
 
 })
