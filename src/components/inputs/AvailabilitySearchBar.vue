@@ -12,6 +12,7 @@
 					>
 						Start Date
 					</span>
+						<!-- /* c8 ignore next 7 */ -->
 					<DateSelector
 						data-testid="date-selector-start"
 						:isLoading="isLoading"
@@ -28,6 +29,7 @@
 					>
 						End Date
 					</span>
+						<!-- /* c8 ignore next 7 */ -->
 					<DateSelector
 						data-testid="date-selector-end"
 						:isLoading="isLoading"

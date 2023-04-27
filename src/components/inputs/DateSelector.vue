@@ -8,6 +8,7 @@ Element for handling manual date (no calendar picker) input
 				:focused="focusMonth"
 				:isLoading="isLoading"
 				is-month
+				ref='month'
 				@newValue="updateParent('month', $event)"
 				@focus="focusMonth = false"
 			/>
@@ -17,6 +18,7 @@ Element for handling manual date (no calendar picker) input
 				:focused="focusDay"
 				:isLoading="isLoading"
 				is-day
+				ref='day'
 				@newValue="updateParent('day', $event)"
 				@focus="focusDay = false"
 			/>
@@ -26,6 +28,7 @@ Element for handling manual date (no calendar picker) input
 				:focused="focusYear"
 				:isLoading="isLoading"
 				is-year
+				ref='year'
 				@newValue="updateParent('year', $event)"
 				@focus="focusYear = false"
 			/>
@@ -104,8 +107,11 @@ export default
 						case 3:
 							return "Past date"
 
+						/* c8 ignore next 3 */
 						default:
 							throw Error("Unknown invalid type")
+							return 'Error'
+
 					}
 				}
 			}

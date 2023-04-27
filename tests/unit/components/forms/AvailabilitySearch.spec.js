@@ -1,4 +1,6 @@
 import { mount } from "@vue/test-utils"
+import {DateTime} from "luxon"
+import {Settings} from 'luxon'
 import AvailabilitySearch from "@/components/forms/AvailabilitySearch.vue"
 
 function createWrapper() {
@@ -22,6 +24,13 @@ describe("AvailabilitySearch Component", () =>
 	let wrapper
 	beforeEach(() =>
 	{
+		// Preset the date for all tests
+		let now = DateTime.local(2023, 4, 26)
+		let rezoned = now.setZone("America/Los_Angeles").toMillis();
+		Settings.now = () => rezoned
+		Settings.defaultZoneName = 'America/Los_Angeles'
+		vi.setSystemTime(rezoned)
+
 		wrapper = createWrapper()
 	})
 	it.concurrent("Renders in general", () => 
@@ -81,8 +90,7 @@ describe("AvailabilitySearch Component", () =>
   });
 
   it.concurrent('displays the correct minDate', () => {
-    const today = new Date().toISOString().split('T')[0];
-    expect(wrapper.vm.minDate).toBe(today);
+    expect(wrapper.vm.minDate).toBe("2023-04-26");
   });
 
   it.concurrent('calculates the correct totalDays', async () => {
