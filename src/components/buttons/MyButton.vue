@@ -143,7 +143,6 @@ export default
         this.beginShake()
         event.preventDefault()
         this.doingWork = false
-        this.$emit("click-prevented")
       }
       else
       {

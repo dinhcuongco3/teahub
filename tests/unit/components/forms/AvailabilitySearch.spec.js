@@ -13,8 +13,6 @@ function createWrapper ()
     {
       global: {
         stubs: [
-          "AvailabilitySearchBar",
-          "BookButton",
           "VueCal",
         ],
       },
