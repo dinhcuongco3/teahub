@@ -18,7 +18,6 @@ describe("Accordion.vue", () =>
       },
     })
 
-    const mainBar = wrapper.find(".main-bar")
     const contentSection = wrapper.find(".accordion-content-section")
 
     expect(contentSection.classes().includes("collapsed")).toBeTruthy()
@@ -28,13 +27,45 @@ describe("Accordion.vue", () =>
     expect(contentSection.classes().includes("expanded")).toBeTruthy()
     expect(contentSection.classes().includes("collapsed")).toBeFalsy()
 
-    // Clicking the same accordion twice does not close it
+    // Wait for animation to end
+    await new Promise((r) => setTimeout(r, 400))
+
+    // Now a second click can happen
+    await wrapper.find(".main-bar").trigger("click")
+    expect(contentSection.classes().includes("collapsed")).toBeTruthy()
+    expect(contentSection.classes().includes("expanded")).toBeFalsy()
+  })
+
+  test("handleClick waits for its animations to end", async () => 
+  {
+    const wrapper = mount(Accordion, {
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+      slots: {
+        title: "Accordion Title",
+        content: "Accordion Content",
+      },
+    })
+
+    const contentSection = wrapper.find(".accordion-content-section")
+
+    expect(contentSection.classes().includes("collapsed")).toBeTruthy()
+    expect(contentSection.classes().includes("expanded")).toBeFalsy()
+
+    await wrapper.find(".main-bar").trigger("click")
+    expect(contentSection.classes().includes("expanded")).toBeTruthy()
+    expect(contentSection.classes().includes("collapsed")).toBeFalsy()
+
+    // Do not wait for the animation to end
     await wrapper.find(".main-bar").trigger("click")
     expect(contentSection.classes().includes("expanded")).toBeTruthy()
     expect(contentSection.classes().includes("collapsed")).toBeFalsy()
   })
 
-  test("hasNested prop adds appropriate classes", async () => 
+  test("hasNested prop adds appropriate classes", () => 
   {
     const wrapper = mount(
       Accordion,
@@ -61,7 +92,7 @@ describe("Accordion.vue", () =>
     expect(titleSection.classes()).toContain("bigger")
   })
 
-  test("renders title and content slots correctly", async () => 
+  test("renders title and content slots correctly", () => 
   {
     const wrapper = mount(
       Accordion,

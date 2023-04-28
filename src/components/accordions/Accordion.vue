@@ -49,7 +49,7 @@ export default {
   },
   methods:
   {
-    /** @returns {void} Suppress state change during current transition */
+    /** @returns {void} Open/close the accordion; Suppresses state change during current transition */
     async handleClick ()
     {
       if (this.isClicked)
