@@ -222,7 +222,7 @@ module.exports = {
       {
         "code": 100,
         "ignoreComments": true,
-        // "ignorePattern": "^\s*d=\".*\".*$",
+        "ignorePattern": "(^\\s*d=\".*\".*$)|(^\\s*it.*\".*\", .*() =>)",
         "ignoreUrls": true,
         "ignoreRegExpLiterals": true,
         "tabWidth": 2,
