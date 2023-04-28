@@ -212,7 +212,7 @@ describe("MyDate.vue", () =>
         },
       }
     )
-    const input = wrapper.find("[placholder=\"dd\"]")
+    const input = wrapper.find("[placeholder=\"dd\"]")
 		expect(input.exists()).toBeTruthy()
 
     // Allowed key codes: numbers 0-9
