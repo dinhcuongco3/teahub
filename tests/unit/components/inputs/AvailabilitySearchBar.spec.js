@@ -84,6 +84,7 @@ describe("AvailabilitySearchBar Component", () =>
     ])
   })
 
+  /** @todo resolve while emitting newDate */
   it("calls updateEndDate when the end date selector emits newDate", () => 
   {
     const endSpy = vi.spyOn(wrapper.vm, "updateEndDate")

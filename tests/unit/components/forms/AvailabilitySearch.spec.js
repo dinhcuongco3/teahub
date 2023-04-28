@@ -13,6 +13,7 @@ function createWrapper ()
     {
       global: {
         stubs: [
+          "FontAwesomeIcon",
           "VueCal",
         ],
       },

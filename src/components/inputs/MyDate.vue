@@ -51,24 +51,6 @@ export default {
   },
   computed:
   {
-    dateField ()
-    {
-      switch (this.placeholder)
-      {
-        case "dd":
-          return "day"
-
-        case "mm":
-          return "month"
-
-        case "yyyy":
-          return "year"
-
-        default:
-          return ""
-      }
-    },
-
     /** */
     isValid ()
     {

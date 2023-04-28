@@ -4,8 +4,8 @@
     :class="classes"
     :disabled="disabled"
     :type="submit ? 'submit' : 'button'"
-    @animationend="onShakeEnd()"
-    @click.stop="onClick()"
+    @animationend="onShakeEnd"
+    @click.stop="onClick"
   >
     <div
       v-if="badgeContent"
@@ -115,9 +115,7 @@ export default
       {
         return ""
       }
-      let content = this.$refs && this.$refs.slotWrapper ?
-        this.$refs.slotWrapper.innerHTML : ""
-      return `${this.inProgress} ${this.success} ${content}`
+      return `${this.inProgress} ${this.success}`
     },
   },
   methods:
@@ -129,8 +127,12 @@ export default
     },
 
     // The user wants to click the button. Propogate event if button is not disabled.
-    onClick ()
+    onClick (ev)
     {
+      if (ev?.preventDefault) 
+      {
+        ev.preventDefault()
+      }
       if (this.doingWork) 
       {
         return
@@ -141,7 +143,6 @@ export default
       {
         // Button is disabled: play animation and send event
         this.beginShake()
-        event.preventDefault()
         this.doingWork = false
       }
       else
