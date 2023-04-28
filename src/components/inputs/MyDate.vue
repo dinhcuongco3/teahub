@@ -58,6 +58,11 @@ export default {
       {
         return false
       }
+      let num = parseInt(this.localValue)
+      if (!num || num !== parseInt(this.localValue)) 
+      {
+        return false
+      }
 
       if (this.isDay)
       {
@@ -78,7 +83,7 @@ export default {
       if (this.isYear)
       {
         // TODO: Allocate to this DateTime
-        if (this.localValue === 0 || this.localValue > 2023)
+        if (this.localValue === 0 || this.localValue < 2023)
         {
           return false
         }
@@ -117,6 +122,7 @@ export default {
   {
     isNumber (evt)
     {
+      /* c8 ignore next 3 */
       evt = (evt) ? evt : window.event
       evt.preventDefault()
       var charCode = (evt.which) ? evt.which : evt.keyCode

@@ -82,10 +82,10 @@ describe("MyDate.vue", () =>
       }, 
     })
     const inputYear = wrapperYear.find("input")
-    await inputYear.setValue("2022")
+    await inputYear.setValue("2023")
     expect(wrapperYear.emitted().newValue).toBeTruthy()
     expect(wrapperYear.emitted().newValue[0]).toEqual([
-      "2022",
+      "2023",
     ])
   })
 
@@ -124,14 +124,14 @@ describe("MyDate.vue", () =>
       }, 
     })
     const inputYear = wrapperYear.find("input")
-    await inputYear.setValue("2024")
+    await inputYear.setValue("2022")
     expect(wrapperYear.emitted().newValue).toBeTruthy()
     expect(wrapperYear.emitted().newValue[0]).toEqual([
       "",
     ])
   })
 
-  // Test for maxlength computed property (lines 59-60)
+  // Test for maxlength computed property
   it("returns maxlength 2 when placeholder is not \"yyyy\"", () => 
   {
     const wrapper = mount(MyDate, {
@@ -155,7 +155,7 @@ describe("MyDate.vue", () =>
     expect(wrapper.findComponent(LoadingBar).exists()).toBe(true)
   })
 
-  // Test for focused watch (lines 112, 118-119)
+  // Test for focused watch
   it("emits \"focus\" event and sets focus on the input when focused prop changes to true", async () => 
   {
     const wrapper = mount(MyDate, {
@@ -163,10 +163,9 @@ describe("MyDate.vue", () =>
     })
     const input = wrapper.find("input")
 
-    // Mock focus method to track when it's called
+    // Mock focus method to track when it is called
     input.element.focus = vi.fn()
 
-    // Set focused prop to true
     await wrapper.setProps({
       focused: true, 
     })
@@ -178,8 +177,7 @@ describe("MyDate.vue", () =>
     expect(input.element.focus).toHaveBeenCalled()
   })
 
-  // Test for value watch (lines 120-130)
-  it("updates localValue when value prop changes", async () => 
+  it("Days: Updates localValue when value prop changes", async () => 
   {
     const wrapper = mount(MyDate, {
       props: {
@@ -187,10 +185,13 @@ describe("MyDate.vue", () =>
         isDay: true, 
       },
     })
+    // Start off false
+    expect(wrapper.vm.isValid).toBe(false)
+
+    // Remains false
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isValid).toBe(false)
 
-    // Set value prop to '15'
     await wrapper.setProps({
       value: "15", 
     })
@@ -199,6 +200,150 @@ describe("MyDate.vue", () =>
     // Check if localValue is updated
     expect(wrapper.vm.localValue).toBe("15")
     expect(wrapper.vm.isValid).toBe(true)
+  })
+
+  it("Days: Sets validity", async () => 
+  {
+    const wrapper = mount(MyDate, {
+      props: {
+        ...props,
+        isDay: true, 
+        value: "", 
+      },
+    })
+    await wrapper.setProps({
+      value: "15", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({
+      value: "32", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "aa", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+  })
+
+  it("Months: Sets validity", async () => 
+  {
+    const wrapper = mount(MyDate, {
+      props: {
+        ...props,
+        isMonth: true, 
+        value: "", 
+      },
+    })
+    await wrapper.setProps({
+      value: "15", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "32", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "02", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({
+      value: "12", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({
+      value: "aa", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+  })
+
+  it("Years: Sets validity", async () => 
+  {
+    const wrapper = mount(MyDate, {
+      props: {
+        ...props,
+        isYear: true, 
+        value: "", 
+      },
+    })
+    await wrapper.setProps({
+      value: "15", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "32", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "02", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "2022", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "2023", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({
+      value: "3023", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({
+      value: "12", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "aa", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({
+      value: "", 
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
   })
 
   test("isNumber allows only valid numeric input", () => 
@@ -213,7 +358,7 @@ describe("MyDate.vue", () =>
       }
     )
     const input = wrapper.find("[placeholder=\"dd\"]")
-		expect(input.exists()).toBeTruthy()
+    expect(input.exists()).toBeTruthy()
 
     // Allowed key codes: numbers 0-9
     for (let i = 48; i <= 57; i++) 
@@ -240,6 +385,21 @@ describe("MyDate.vue", () =>
       }
     }
   })
+  it("is not valid unless type is specified", async () => 
+  {
+    const wrapper = mount(MyDate, {
+      props: {
+        ...props,
+      }, 
+    })
 
+    await wrapper.setProps({
+      value: "15", 
+    })
+    await wrapper.vm.$nextTick()
+
+    // Check if localValue is updated
+    expect(wrapper.vm.localValue).toBe("15")
+    expect(wrapper.vm.isValid).toBe(false)
+  })
 })
-
