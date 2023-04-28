@@ -77,6 +77,7 @@ export default {
       }
       if (this.isYear)
       {
+        // TODO: Allocate to this DateTime
         if (this.localValue === 0 || this.localValue > 2023)
         {
           return false
@@ -117,12 +118,13 @@ export default {
     isNumber (evt)
     {
       evt = (evt) ? evt : window.event
+      evt.preventDefault()
       var charCode = (evt.which) ? evt.which : evt.keyCode
 
       if ((charCode > 31 && (charCode < 48 || charCode > 57)) &&
         charCode !== 46)
       {
-        evt.preventDefault()
+        return false
       }
       else
       {

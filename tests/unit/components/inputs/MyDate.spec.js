@@ -1,4 +1,5 @@
 import { mount } from "@vue/test-utils"
+
 import MyDate from "@/components/inputs/MyDate.vue"
 import LoadingBar from "@/components/common/loading/LoadingBar.vue"
 
@@ -181,16 +182,64 @@ describe("MyDate.vue", () =>
   it("updates localValue when value prop changes", async () => 
   {
     const wrapper = mount(MyDate, {
-      props: props, 
+      props: {
+        ...props,
+        isDay: true, 
+      },
     })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isValid).toBe(false)
 
     // Set value prop to '15'
     await wrapper.setProps({
       value: "15", 
     })
+    await wrapper.vm.$nextTick()
 
     // Check if localValue is updated
     expect(wrapper.vm.localValue).toBe("15")
+    expect(wrapper.vm.isValid).toBe(true)
   })
+
+  test("isNumber allows only valid numeric input", () => 
+  {
+    const wrapper = mount(
+      MyDate,
+      {
+        props: {
+          ...props,
+          isDay: true, 
+        },
+      }
+    )
+    const input = wrapper.find("[placholder=\"dd\"]")
+		expect(input.exists()).toBeTruthy()
+
+    // Allowed key codes: numbers 0-9
+    for (let i = 48; i <= 57; i++) 
+    {
+      const event = new KeyboardEvent("keypress", {
+        which: i,
+        keyCode: i, 
+      })
+      let isNumber = wrapper.vm.isNumber(event)
+      expect(isNumber).toBe(true)
+    }
+
+    // Disallowed key codes: letters A-Z, a-z, and other symbols
+    for (let i = 32; i <= 126; i++) 
+    {
+      if ((i < 48 || i > 57) && i !== 46) 
+      {
+        const event = new KeyboardEvent("keypress", {
+          which: i,
+          keyCode: i, 
+        })
+        let isNumber = wrapper.vm.isNumber(event)
+        expect(isNumber).toBe(false)
+      }
+    }
+  })
+
 })
 
