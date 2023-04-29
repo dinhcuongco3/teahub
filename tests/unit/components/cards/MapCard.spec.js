@@ -61,7 +61,7 @@ describe("MapCard", () =>
 
     // Mock router push method
     wrapper.vm.$router = {
-      push: jest.fn(),
+      push: vi.fn(),
     }
 
     // Trigger the button click

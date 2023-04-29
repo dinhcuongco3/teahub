@@ -20,9 +20,9 @@ describe("Copyright", () =>
     const currentYear = new Date().getFullYear()
 
     expect(wrapper.text()).toContain("Copyright")
-    expect(wrapper.text()).toContain("©")
     expect(wrapper.text()).toContain(`${currentYear}`)
     expect(wrapper.text()).toContain("Tanner Woody All Rights Reserved")
+    expect(wrapper.find('[data-testid="teahub-copyright"]').exists()).toBeTruthy()
   })
 })
 
