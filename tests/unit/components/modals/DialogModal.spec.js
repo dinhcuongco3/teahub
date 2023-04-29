@@ -3,9 +3,17 @@ import DialogModal from "@/components/modals/DialogModal.vue"
 
 const createWrapper = (props) => 
 {
-  return mount(DialogModal, {
-    props, 
-  })
+  return mount(
+		DialogModal,
+		{
+			props,
+			global: {
+				stubs: [
+					"FontAwesomeIcon",
+				],
+			},
+		},
+	)
 }
 
 describe("DialogModal", () => 
