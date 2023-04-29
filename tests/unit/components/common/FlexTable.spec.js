@@ -1,14 +1,18 @@
-import { mount } from 'vitest/vue'
-import { defineComponent } from 'vue'
-import FlexTable from 'path/to/FlexTable.vue'
+import { mount } from "@vue/test-utils"
+import { defineComponent } from "vue"
+import FlexTable from "@/components/common/FlexTable.vue"
 
-const createWrapper = (categoryContent, contentContent) => {
+const createWrapper = (categoryContent, contentContent) => 
+{
   return mount(defineComponent({
-    components: { FlexTable },
-    data() {
+    components: {
+      FlexTable, 
+    },
+    data () 
+    {
       return {
         categoryContent,
-        contentContent
+        contentContent,
       }
     },
     template: `
@@ -24,21 +28,24 @@ const createWrapper = (categoryContent, contentContent) => {
   }))
 }
 
-describe('FlexTable', () => {
-  it('renders the correct category and content', () => {
-    const categoryContent = 'Test Category'
-    const contentContent = 'Test Content'
+describe("FlexTable", () => 
+{
+  it("renders the correct category and content", () => 
+  {
+    const categoryContent = "Test Category"
+    const contentContent = "Test Content"
     const wrapper = createWrapper(categoryContent, contentContent)
 
-    expect(wrapper.find('.category-section').text()).toContain(categoryContent)
-    expect(wrapper.find('.content-section').text()).toContain(contentContent)
+    expect(wrapper.find(".category-section").text()).toContain(categoryContent)
+    expect(wrapper.find(".content-section").text()).toContain(contentContent)
   })
 
-  it('renders empty category and content if not provided', () => {
-    const wrapper = createWrapper('', '')
+  it("renders empty category and content if not provided", () => 
+  {
+    const wrapper = createWrapper("", "")
 
-    expect(wrapper.find('.category-section').text()).toBe('')
-    expect(wrapper.find('.content-section').text()).toBe('')
+    expect(wrapper.find(".category-section").text()).toBe("")
+    expect(wrapper.find(".content-section").text()).toBe("")
   })
 })
 

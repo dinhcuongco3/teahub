@@ -1,23 +1,29 @@
-import { mount } from 'vitest/vue'
-import { defineComponent } from 'vue'
-import Copyright from 'path/to/Copyright.vue'
+import { mount } from "@vue/test-utils"
+import SocialLogin from "@/components/forms/SocialLogin.vue"
+import FacebookLogin from "@/components/buttons/login/FacebookLogin.vue"
+import GoogleLogin from "@/components/buttons/login/GoogleLogin.vue"
 
-const createWrapper = () => {
-  return mount(defineComponent({
-    components: { Copyright },
-    template: '<Copyright />',
-  }))
+const createWrapper = () => 
+{
+  return mount(SocialLogin)
 }
 
-describe('Copyright', () => {
-  it('renders the correct copyright text and year', () => {
+describe("SocialLogin", () => 
+{
+  it("renders GoogleLogin component", () => 
+  {
     const wrapper = createWrapper()
-    const currentYear = new Date().getFullYear()
 
-    expect(wrapper.text()).toContain(`Copyright`)
-    expect(wrapper.text()).toContain(`©`)
-    expect(wrapper.text()).toContain(`${currentYear}`)
-    expect(wrapper.text()).toContain(`Tanner Woody All Rights Reserved`)
+    expect(wrapper.findComponent(GoogleLogin).exists()).toBe(true)
+    expect(wrapper.find(".login-option").text()).toContain("or login with Google")
+  })
+
+  it("renders FacebookLogin component", () => 
+  {
+    const wrapper = createWrapper()
+
+    expect(wrapper.findComponent(FacebookLogin).exists()).toBe(true)
+    expect(wrapper.findAll(".login-option")[1].text()).toContain("or login with Google")
   })
 })
 

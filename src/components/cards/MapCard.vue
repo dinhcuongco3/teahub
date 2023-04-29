@@ -66,12 +66,13 @@ export default {
       return this.activity.title || "-"
     },
 
+    // TODO: Setup as a prop
     url ()
     {
-      if (this.$store.state.isOnline)
-      {
-        return "https://firebasestorage.googleapis.com/v0/b/votel-f1c47.appspot.com/o/cat-with-hammer.png?alt=media&token=e717e395-6406-4a57-83ac-b8c838427d91"
-      }
+      //     if (this.$store.state.isOnline)
+      //     {
+      //       return "https://firebasestorage.googleapis.com/v0/b/votel-f1c47.appspot.com/o/cat-with-hammer.png?alt=media&token=e717e395-6406-4a57-83ac-b8c838427d91"
+      //     }
       return "assets/imgs/cat-with-hammer.png"
     },
   },
