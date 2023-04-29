@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Accordion from "components/common/Accordion"
+import Accordion from "components/accordions/Accordion.vue"
 
 export default {
   name: "QuestionAccordion",

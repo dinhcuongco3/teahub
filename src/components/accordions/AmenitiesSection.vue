@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import Accordion from "components/common/Accordion"
-import FlexTable from "components/common/FlexTable"
+import Accordion from "components/accordions/Accordion.vue"
+import FlexTable from "components/common/FlexTable.vue"
 
 export default {
   name: "AmenitiesSection",
@@ -97,7 +97,7 @@ export default {
       {
         const A = a.title || ""
         const B = b.title || ""
-        A.localeCompare(B)
+        return A.localeCompare(B)
       })
     },
   },

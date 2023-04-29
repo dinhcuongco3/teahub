@@ -2,7 +2,7 @@
   <div class="flex-box endorsements-wrapper">
     <ul>
       <li
-        v-for="endorser in endorsers"
+        v-for="endorser in notCitizens"
         :key="endorser.id"
       >
         <Endorsement
@@ -11,11 +11,14 @@
           :position="endorser.position"
         />
       </li>
-      <li>
+      <li
+        v-if="citizens.length"
+        ref="citizens"
+      >
         Engaged Citizens:
         <ul>
           <li
-            v-for="endorser in ENDORSERS.CITIZENS"
+            v-for="endorser in citizens"
             :key="endorser.id"
           >
             <Endorsement
@@ -30,7 +33,7 @@
 </template>
 
 <script>
-import Endorsement from "components/anchors/endorsements/Endorsement"
+import Endorsement from "components/anchors/endorsements/Endorsement.vue"
 export default {
   name: "Endorsements",
   components:
@@ -41,6 +44,21 @@ export default {
     endorsers: {
       required: true,
       type: Array,
+    },
+  },
+  computed: {
+    // TODO: Magic number
+    /** @returns {Array} List of endorsers who are citizens */
+    citizens () 
+    {
+      return this.endorsers.filter((endorser) => endorser.endorsementType === 1)
+    },
+
+    // TODO: Magic number
+    /** @returns {Array} List of endorsers who are NOT citizens */
+    notCitizens () 
+    {
+      return this.endorsers.filter((endorser) => endorser.endorsementType !== 1)
     },
   },
 }
