@@ -4,12 +4,21 @@ import Copyright from "@/components/common/Copyright.vue"
 
 const createWrapper = () => 
 {
-  return mount(defineComponent({
-    components: {
-      Copyright, 
-    },
-    template: "<Copyright />",
-  }))
+  return mount(
+    defineComponent({
+      components: {
+        Copyright, 
+      },
+      template: "<Copyright />",
+    }),
+    {
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
 describe("Copyright", () => 
@@ -22,7 +31,7 @@ describe("Copyright", () =>
     expect(wrapper.text()).toContain("Copyright")
     expect(wrapper.text()).toContain(`${currentYear}`)
     expect(wrapper.text()).toContain("Tanner Woody All Rights Reserved")
-    expect(wrapper.find('[data-testid="teahub-copyright"]').exists()).toBeTruthy()
+    expect(wrapper.find("[data-testid=\"teahub-copyright\"]").exists()).toBeTruthy()
   })
 })
 

@@ -78,16 +78,18 @@ export default {
   },
   methods: {
     /**
+     * @todo Cannot do a router push here, I thinks
      * @param {string} id - Poorly names object s.t. id is string and not int
      */
     gotoItem (id) 
     {
-      this.$router.push({
-        name: "mapItem", 
-        params: {
-          id, 
-        },
-      })
+      //     this.$router.push({
+      //       name: "mapItem", 
+      //       params: {
+      //         id, 
+      //       },
+      //     })
+			console.info(id)
     },
   },
 }

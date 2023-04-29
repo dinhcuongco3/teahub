@@ -5,7 +5,16 @@ import GoogleLogin from "@/components/buttons/login/GoogleLogin.vue"
 
 const createWrapper = () => 
 {
-  return mount(SocialLogin)
+  return mount(
+    SocialLogin,
+    {
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
 describe("SocialLogin", () => 
@@ -15,7 +24,6 @@ describe("SocialLogin", () =>
     const wrapper = createWrapper()
 
     expect(wrapper.findComponent(GoogleLogin).exists()).toBe(true)
-    expect(wrapper.find(".login-option").text()).toContain("or login with Google")
   })
 
   it("renders FacebookLogin component", () => 
@@ -23,7 +31,6 @@ describe("SocialLogin", () =>
     const wrapper = createWrapper()
 
     expect(wrapper.findComponent(FacebookLogin).exists()).toBe(true)
-    expect(wrapper.findAll(".login-option")[1].text()).toContain("or login with Google")
   })
 })
 

@@ -1,18 +1,14 @@
 User should be able to register/login from multiple places
 <template>
   <div class="social-login-wrapper">
-    <GoogleLogin class="login-option">
-      or login with Google
-    </GoogleLogin>
-    <FacebookLogin class="login-option">
-      or login with Google
-    </FacebookLogin>
+    <GoogleLogin class="login-option"/>
+    <FacebookLogin class="login-option"/>
   </div>
 </template>
 
 <script>
-import FacebookLogin from "@/components/buttons/login/FacebookLogin"
-import GoogleLogin from "@/components/buttons/login/GoogleLogin"
+import FacebookLogin from "@/components/buttons/login/FacebookLogin.vue"
+import GoogleLogin from "@/components/buttons/login/GoogleLogin.vue"
 
 export default {
   name: "SocialLogin",

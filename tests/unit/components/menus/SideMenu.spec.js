@@ -3,9 +3,17 @@ import SideMenu from "@/components/menus/SideMenu.vue"
 
 const createWrapper = (props) => 
 {
-  return mount(SideMenu, {
-    props, 
-  })
+  return mount(
+    SideMenu,
+    {
+      props,
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
 describe("SideMenu", () => 
