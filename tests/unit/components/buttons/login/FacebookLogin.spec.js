@@ -1,6 +1,8 @@
 import { mount } from "@vue/test-utils"
 import FacebookLogin from "@/components/buttons/login/FacebookLogin.vue"
 
+vi.mock("firebase/auth")
+
 const createWrapper = () => 
 {
   return mount(
@@ -32,16 +34,15 @@ describe("FacebookLogin", () =>
     expect(iconComponent.exists()).toBeTruthy()
   })
 
-  it("calls facebookLogin method when button is clicked", async () => 
+  it("calls googleLogin method when button is clicked", async () => 
   {
     const wrapper = createWrapper()
-    const facebookLoginMock = vi.spyOn(wrapper.vm, "facebookLogin")
-
+    const spy = vi.spyOn(wrapper.vm, "facebookLogin")
     const myButtonComponent = wrapper.findComponent({
       name: "MyButton", 
     })
     await myButtonComponent.trigger("click")
 
-    expect(facebookLoginMock).toHaveBeenCalled()
+    expect(spy).toHaveBeenCalled()
   })
 })
