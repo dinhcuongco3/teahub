@@ -39,14 +39,14 @@ export default {
     /**
      * Use firebase to support logging in with a facebook account
      *
-     * @returns {void}
+     * @returns {boolean} Was work done
      * @since 0.1.3
      */
     async facebookLogin ()
     {
       if (this.isLoggingIn === true)
       {
-        return
+        return false
       }
 
       this.isLoggingIn = true
@@ -91,6 +91,7 @@ export default {
       }
       /* eslint-enable no-unused-vars */
       this.isLoggingIn = false
+      return true
     },
   },
 }

@@ -34,6 +34,35 @@ describe("GoogleLogin", () =>
     expect(iconComponent.exists()).toBeTruthy()
   })
 
+  it("will not login if already loggin-in", async () => 
+  {
+    const wrapper = createWrapper()
+    // Clicking button will set isLogginIn state
+    wrapper.findComponent({
+      name: "MyButton",
+    }).trigger("click")
+
+    let success = await wrapper.vm.googleLogin()
+    expect(success).toBe(false)
+  })
+
+  it("will login if not logging-in", async () => 
+  {
+    const wrapper = createWrapper()
+    const spy = vi.spyOn(wrapper.vm, "googleLogin")
+    await wrapper.setData({
+      isLoggingIn: false,
+    })
+
+    const myButtonComponent = wrapper.findComponent({
+      name: "MyButton", 
+    })
+    myButtonComponent.trigger("click")
+
+    expect(spy).toHaveBeenCalled()
+    expect(wrapper.vm.isLoggingIn).toBe(true)
+  })
+
   it("calls googleLogin method when button is clicked", async () => 
   {
     const wrapper = createWrapper()

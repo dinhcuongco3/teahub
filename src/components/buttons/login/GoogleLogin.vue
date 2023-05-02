@@ -39,14 +39,14 @@ export default {
      * Use firebase to support logging in with a google account
      *
      * @todo Configure with some .env vars
-     * @returns {void}
+     * @returns {boolean} Was work done
      * @since 0.0.0
      */
     async googleLogin ()
     {
       if (this.isLoggingIn === true)
       {
-        return
+        return false
       }
 
       this.isLoggingIn = true
@@ -88,6 +88,7 @@ export default {
       }
       /* eslint-enable no-unused-vars */
       this.isLoggingIn = false
+      return true
     },
   },
 }
