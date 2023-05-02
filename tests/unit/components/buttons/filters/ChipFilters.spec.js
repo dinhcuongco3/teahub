@@ -2,6 +2,10 @@ import { mount } from "@vue/test-utils"
 import {MAP_FILTERS} from "mocks/filters.js"
 import ChipFilters from "@/components/buttons/filters/ChipFilters.vue"
 
+const FILTERS = {
+  1: "foo",
+  2: "bar",
+}
 const createWrapper = (props) => 
 {
   return mount(
@@ -19,6 +23,36 @@ const createWrapper = (props) =>
 
 describe("ChipFilters", () => 
 {
+  it("Sort filters by title: 'b' comes before 'f'", () =>
+  {
+    const wrapper = createWrapper({
+      filters: FILTERS,
+    })
+    const a = wrapper.vm.filtersAll[1]
+    const b = wrapper.vm.filtersAll[2]
+    const flip = wrapper.vm.sortFilter(a, b)
+    expect(flip).toBe(1)
+  })
+  it("Sort filters by title: 'f' comes before 'b'", () =>
+  {
+    const wrapper = createWrapper({
+      filters: FILTERS,
+    })
+    const a = wrapper.vm.filtersAll[2]
+    const b = wrapper.vm.filtersAll[1]
+    const flip = wrapper.vm.sortFilter(a, b)
+    expect(flip).toBe(-1)
+  })
+  it("Sort filters by title: Same title", () =>
+  {
+    const wrapper = createWrapper({
+      filters: FILTERS,
+    })
+    const a = wrapper.vm.filtersAll[1]
+    const b = wrapper.vm.filtersAll[1]
+    const flip = wrapper.vm.sortFilter(a, b)
+    expect(flip).toBe(0)
+  })
   it("renders both Filters components", () => 
   {
     const wrapper = createWrapper({
@@ -33,10 +67,6 @@ describe("ChipFilters", () =>
 
   it("toggles filter state and emits updated-active event", async () => 
   {
-    const FILTERS = {
-      1: "foo",
-      2: "bar",
-    }
     const wrapper = createWrapper({
       filters: FILTERS,
     })
