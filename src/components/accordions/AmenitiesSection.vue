@@ -78,7 +78,6 @@ export default {
   {
     /** Different kind of amenities; E.g. washer, dryer, tea kettle */
     amenities: {
-      default: () => [],
       required: true,
       type: Array,
     },
