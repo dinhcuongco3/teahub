@@ -14,22 +14,25 @@
 </template>
 
 <script>
-import { getAnalytics, logEvent } from "firebase/analytics"
-import {MAP_FILTERS} from "constants/misc.js"
 import Filters from "components/buttons/filters/Filters"
 
 export default {
-  name: "CleaningFilters",
+  name: "ChipFilters",
   components:
   {
     Filters,
   },
-
+  props:
+  {
+		filters: {
+			required: true,
+			type: Object,
+		},
+	},
   data: function()
   {
     return {
       /** Store a local copy to manage state */
-      filters: MAP_FILTERS,
       filtersAll: {},
     }
   },
@@ -98,24 +101,7 @@ export default {
       let value = ! this.filtersAll[ID].active
       this.filtersAll[ID].active = value
 
-      // Send event to GA
-      try
-      {
-        const analytics = getAnalytics()
-        const title = value ? "cleaning_filter_set" : "cleaning_filter_unset"
-        logEvent(
-          analytics,
-          title,
-          {
-            value: this.filtersAll[id].title || "NOT_FOUND",
-          }
-        )
-      }
-      catch (e)
-      {
-        console.error(e)
-      }
-
+			this.$emit("clicked-elemtn", id)
     },
 
     /**
