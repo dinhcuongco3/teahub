@@ -8,6 +8,11 @@ const createWrapper = (props) =>
     slots: {
       default: "Test Filter", 
     }, 
+    global: {
+      stubs: [
+        "FontAwesomeIcon",
+      ],
+    },
   })
 }
 

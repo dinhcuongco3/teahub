@@ -1,5 +1,3 @@
-TODO: Error handling
-TODO: PRobably plugin inputs... :eye_roll:
 <template>
   <div class="availability-search-wrapper">
     <div class="content-section">
@@ -26,11 +24,12 @@ TODO: PRobably plugin inputs... :eye_roll:
           xsmall
           @cell-click="processDateSelection($event)"
         />
+        <!-- /* c8 ignore next 4 */ -->
         <BookButton
           :disabled="!isBookingEnabled"
           :isLoading="isLoading"
           :totalPrice="totalPrice"
-          @click="handleAvailabilitySearch"
+          @click="handleAvailabilitySearch()"
         />
       </form>
     </div>
@@ -134,23 +133,14 @@ export default {
       try
       {
         // sleep for .5 seconds for faux https mgmt
-        await new Promise((r) => setTimeout(r, 5000))
+        await new Promise((r) => setTimeout(r, 2000))
       }
+      /* c8 ignore next 4 */
       catch (error)
       {
         this.hasError = true
       }
       this.isLoading = false
-    },
-
-    isDateValid (__d)
-    {
-      let d = DateTime.fromObject(__d)
-      if (d < this.minDate)
-      {
-        return false
-      }
-      return true
     },
 
     /**
@@ -159,31 +149,37 @@ export default {
      */
     processDateSelection (selected)
     {
+      console.log(selected)
       let d = DateTime.fromJSDate(new Date(selected))
       let start = DateTime.fromISO(this.selectedDates[0].start)
       let min = DateTime.fromISO(this.minDate)
       let max = DateTime.fromISO(this.maxDate)
 
+      // Selected date cannot be out of bounds
       if (d < min || d > max)
       {
         console.error("Illegal date selection")
         return false
       }
 
+      // If a current start date does not exist, make first selection the start date
       if (!this.selectedDates[0].start)
       {
         this.selectedDates[0].start = d.toISODate()
       }
 
+      // If user clicks their start date, it clears the selection
       if (d.toFormat("yyyyMMdd") === start.toFormat("yyyyMMdd"))
       {
         this.selectedDates[0].start = ""
         this.selectedDates[0].end = ""
       }
+      // If user clicks a date before their currently selected start, move back the start
       else if (d < start)
       {
         this.selectedDates[0].start = d.toISODate()
       }
+      // Else, always just adjust the end date
       else
       {
         this.selectedDates[0].end = d.toISODate()

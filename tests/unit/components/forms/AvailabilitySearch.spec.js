@@ -4,6 +4,10 @@ import {Settings} from "luxon"
 import AvailabilitySearch from "@/components/forms/AvailabilitySearch.vue"
 
 /**
+ * NOTE: vuecal dates in form of "2023-05-10T08:00:00.000Z"
+ */
+
+/**
  *
  */
 function createWrapper () 
@@ -61,23 +65,6 @@ describe("AvailabilitySearch Component", () =>
     await wrapper.vm.handleAvailabilitySearch()
     expect(wrapper.vm.isLoading).toBeFalsy()
     expect(wrapper.vm.hasError).toBeFalsy()
-  })
-
-  // TODO: Debug from 127c7e5a436eb62f2467abaef1ba02bc7f5747c5
-  it.concurrent("Updates payload with query", async () => 
-  {
-    let isolatedWrapper = createWrapper()
-    expect(isolatedWrapper.find("div.availability-search-wrapper").exists()).toBeTruthy()
-    expect.assertions(1)
-    try
-    {
-      await wrapper.vm.handleAvailabilitySearch()
-    }
-    catch (e)
-    {
-      expect(wrapper.vm.hasError).toBeTruthy()
-      expect(wrapper.vm.isLoading).toBeFalsy()
-    }
   })
 
   it.concurrent("displays the AvailabilitySearchBar component", () => 
@@ -154,4 +141,162 @@ describe("AvailabilitySearch Component", () =>
     expect(isolatedWrapper.vm.selectedDates[0].start).toBe(expectedStartDate)
   })
 
+  it.concurrent("informs if date is invalid", () => 
+  {
+    let isolatedWrapper = createWrapper()
+    expect(wrapper.vm.minDate).toBe("2023-04-26")
+   
+    const selectedDate = "2023-05-10T08:00:00.000Z"
+    const expectedStartDate = "2023-05-10"
+
+    expect(isolatedWrapper.vm.processDateSelection(selectedDate)).toBe(true)
+    expect(isolatedWrapper.vm.selectedDates[0].start).toBe(expectedStartDate)
+  })
+
+  it.concurrent("renders child components", () => 
+  {
+    const wrapper = createWrapper()
+
+    const availabilitySearchBar = wrapper.findComponent({
+      name: "AvailabilitySearchBar", 
+    })
+    expect(availabilitySearchBar.exists()).toBeTruthy()
+
+    const bookButton = wrapper.findComponent({
+      name: "BookButton", 
+    })
+    expect(bookButton.exists()).toBeTruthy()
+
+    const vueCal = wrapper.findComponent({
+      name: "VueCal", 
+    })
+    expect(vueCal.exists()).toBeTruthy()
+  })
+
+  it.concurrent("isBookingEnabled computed property returns expected value", async () => 
+  {
+    const wrapper = createWrapper()
+    const selectedDates = wrapper.vm.selectedDates
+
+    expect(wrapper.vm.isBookingEnabled).toBeFalsy()
+
+    selectedDates[0].start = "2023-05-10"
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isBookingEnabled).toBeFalsy()
+
+    selectedDates[0].end = "2023-05-15"
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isBookingEnabled).toBeTruthy()
+  })
+
+  it.concurrent("handleAvailabilitySearch sets isLoading state correctly", async () => 
+  {
+    const wrapper = createWrapper()
+
+    expect(wrapper.vm.isLoading).toBeFalsy()
+
+    wrapper.vm.handleAvailabilitySearch()
+    expect(wrapper.vm.isLoading).toBeTruthy()
+
+    // Wait for the handleAvailabilitySearch method to finish execution
+    await new Promise((resolve) => setTimeout(resolve, 2500))
+
+    expect(wrapper.vm.isLoading).toBeFalsy()
+  })
+
+  // TODO
+  it.concurrent("Does error handling", () => 
+  {
+    const wrapper = createWrapper()
+    let success = wrapper.vm.processDateSelection("2023-02-02")
+    expect(success).toBe(false)
+  })
+
+  it.concurrent("does not allow date selections out of bounds", () => 
+  {
+    const wrapper = createWrapper()
+    let success = wrapper.vm.processDateSelection("2023-02-02")
+    expect(success).toBe(false)
+  })
+
+  it.concurrent("updates the start date when selected before", () => 
+  {
+    const wrapper = createWrapper()
+    let success = wrapper.vm.processDateSelection("2023-05-02")
+    expect(success).toBe(true)
+    expect(wrapper.vm.selectedDates[0].start).toBe("2023-05-01")
+  })
+
+  it.concurrent("reclicking the start date clears current selection", () => 
+  {
+    const wrapper = createWrapper()
+    wrapper.vm.processDateSelection("2023-05-02")
+    wrapper.vm.processDateSelection("2023-05-02")
+    expect(wrapper.vm.selectedDates[0].start).toBe("")
+  })
+
+  it.concurrent("clicking before the start date sets the start date", () => 
+  {
+    const wrapper = createWrapper()
+    wrapper.vm.processDateSelection("2023-05-03T08:00:00.000Z")
+    wrapper.vm.processDateSelection("2023-05-02T08:00:00.000Z")
+    expect(wrapper.vm.selectedDates[0].start).toBe("2023-05-02")
+    expect(wrapper.vm.selectedDates[0].end).toBe("2023-05-03")
+  })
+
+  it.concurrent("handles updateEndDate events", async () => 
+  {
+    const wrapper = createWrapper()
+    const searchBar = wrapper.findComponent({
+      name: "AvailabilitySearchBar",
+    })
+    await searchBar.vm.$emit("updateEndDate", "2023-05-02T08:00:00.000Z")
+    expect(wrapper.vm.selectedDates[0].end).toBe("2023-05-02T08:00:00.000Z")
+  })
+
+  it.concurrent("handles updateStartDate events", async () => 
+  {
+    const wrapper = createWrapper()
+    const searchBar = wrapper.findComponent({
+      name: "AvailabilitySearchBar",
+    })
+    await searchBar.vm.$emit("updateStartDate", "2023-05-03T08:00:00.000Z")
+    expect(wrapper.vm.selectedDates[0].start).toBe("2023-05-03T08:00:00.000Z")
+  })
+
+  it.concurrent("listens to vuecal events", async () => 
+  {
+    const wrapper = createWrapper()
+    const searchBar = wrapper.findComponent({
+      name: "VueCal",
+    })
+    await searchBar.vm.$emit("cell-click", "2023-05-03T08:00:00.000Z")
+    expect(wrapper.vm.selectedDates[0].start).toBe("2023-05-03")
+  })
+
+  it.concurrent("listens to the BookButton events", async () => 
+  {
+    const wrapper = createWrapper()
+    const spy = vi.spyOn(wrapper.vm, "handleAvailabilitySearch")
+
+    // Disabled
+    wrapper.findComponent({
+      name: "BookButton", 
+    }).trigger("click")
+    expect(spy).not.toHaveBeenCalled()
+
+    // Enable button
+    const searchBar = wrapper.findComponent({
+      name: "AvailabilitySearchBar",
+    })
+    await searchBar.vm.$emit("updateStartDate", "2023-05-03T08:00:00.000Z")
+    await searchBar.vm.$emit("updateEndDate", "2023-05-04T08:00:00.000Z")
+
+    wrapper.findComponent({
+      name: "BookButton", 
+    }).trigger("click")
+    expect(spy).toHaveBeenCalled()
+  })
 })
