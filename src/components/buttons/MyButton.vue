@@ -147,9 +147,6 @@ export default
       }
       else
       {
-        // Send click event as normal
-        this.$emit("click")
-
         // Wait for animation
         this.doingWork = false
       }

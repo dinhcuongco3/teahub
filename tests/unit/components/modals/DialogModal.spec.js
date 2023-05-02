@@ -1,5 +1,6 @@
 import { mount } from "@vue/test-utils"
 import DialogModal from "@/components/modals/DialogModal.vue"
+import MyButton from "components/buttons/MyButton.vue"
 
 const createWrapper = (props) => 
 {
@@ -45,8 +46,8 @@ describe("DialogModal", () =>
     const wrapper = createWrapper({
       visible: true, 
     })
-
-    await wrapper.find(".dialog-button").trigger("click")
+    wrapper.findComponent(MyButton).trigger("click")
+    await wrapper.vm.$nextTick()
     expect(wrapper.emitted("close")).toHaveLength(1)
   })
 

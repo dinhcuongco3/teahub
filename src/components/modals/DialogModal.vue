@@ -1,8 +1,12 @@
 <template>
-  <div class="dialog-modal" v-if="visible">
+  <div
+    v-if="visible"
+    class="dialog-modal"
+  >
     <div
       class="dialog-overlay"
-      @click="close"/>
+      @click="close"
+    />
     <div
       class="dialog-content"
       :style="{ backgroundColor: backgroundColor }"
