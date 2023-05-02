@@ -24,7 +24,6 @@
           xsmall
           @cell-click="processDateSelection($event)"
         />
-        <!-- /* c8 ignore next 4 */ -->
         <BookButton
           :disabled="!isBookingEnabled"
           :isLoading="isLoading"
@@ -149,7 +148,6 @@ export default {
      */
     processDateSelection (selected)
     {
-      console.log(selected)
       let d = DateTime.fromJSDate(new Date(selected))
       let start = DateTime.fromISO(this.selectedDates[0].start)
       let min = DateTime.fromISO(this.minDate)
