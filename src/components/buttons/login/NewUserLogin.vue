@@ -1,8 +1,9 @@
 Button to instantiate a new user
 <template>
   <div
+    data-testid="new-user-login-wrapper"
     class="new-user-login-wrapper"
-    @click="handleClick"
+    @click="handleClick()"
   >
     <div class="social-button-dex">
       Register Email
@@ -10,7 +11,7 @@ Button to instantiate a new user
     <MyButton
       class="social-button"
       :disabled="isDisabled"
-      @click="registerNewUser"
+      @click="registerNewUser()"
     >
       <font-awesome-icon
         alt="New User Registration" 
@@ -27,7 +28,7 @@ import firebase from "firebase/app"
 import MyButton from "@/components/buttons/MyButton.vue"
 
 export default {
-  name: "NewUserRegistration",
+  name: "NewUserLogin",
   components:
   {
     MyButton,
