@@ -1,11 +1,13 @@
 <template>
   <div class="cleaning-filters-wrapper">
     <Filters
+      data-testid="inactive-filter-set"
       :filters="filtersInactive"
       inactive
       @update="handleClick($event)"
     />
     <Filters
+      data-testid="active-filter-set"
       :filters="filtersActive"
       inactive
       @update="handleClick($event)"
@@ -14,7 +16,7 @@
 </template>
 
 <script>
-import Filters from "components/buttons/filters/Filters"
+import Filters from "components/buttons/filters/Filters.vue"
 
 export default {
   name: "ChipFilters",
@@ -24,11 +26,11 @@ export default {
   },
   props:
   {
-		filters: {
-			required: true,
-			type: Object,
-		},
-	},
+    filters: {
+      required: true,
+      type: Object,
+    },
+  },
   data: function()
   {
     return {
@@ -101,13 +103,13 @@ export default {
       let value = ! this.filtersAll[ID].active
       this.filtersAll[ID].active = value
 
-			this.$emit("clicked-elemtn", id)
+      this.$emit("clicked-element", id)
     },
 
     /**
      * @param {object} a - A filter
      * @param {object} b - A filter
-     * @returns {boolean} Should `a` come after `b` alphabetically?
+     * @returns {boolean} Should object `a` come after object `b` alphabetically?
      */
     sortFilter (a, b) 
     {

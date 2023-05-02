@@ -37,8 +37,8 @@ export default {
   {
     /**
      * Use firebase to support logging in with a google account
-		 * @todo Configure with some .env vars
      *
+     * @todo Configure with some .env vars
      * @returns {void}
      * @since 0.0.0
      */

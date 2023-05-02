@@ -15,7 +15,7 @@ const update = (id) =>
       :key="filter.id"
       :inactive="! filter.active"
       type="button"
-      @mouseup="update(filter.id)"
+      @click="update(filter.id)"
     >
       {{ formatTitle(filter) }}
     </MyFilter>
@@ -23,7 +23,7 @@ const update = (id) =>
 </template>
 
 <script>
-import MyFilter from "components/buttons/filters/MyFilter"
+import MyFilter from "components/buttons/filters/MyFilter.vue"
 
 export default {
   name: "Filters",

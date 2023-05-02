@@ -6,15 +6,15 @@ vi.mock("firebase/auth")
 const createWrapper = () => 
 {
   return mount(
-		GoogleLogin,
-		{
-			global: {
-				stubs: [
-					"FontAwesomeIcon",
-				],
-			},
-		}
-	)
+    GoogleLogin,
+    {
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
 describe("GoogleLogin", () => 

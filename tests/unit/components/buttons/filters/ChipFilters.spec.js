@@ -1,18 +1,29 @@
 import { mount } from "@vue/test-utils"
-import CleaningFilters from "@/components/buttons/filters/CleaningFilters.vue"
+import {MAP_FILTERS} from "mocks/filters.js"
+import ChipFilters from "@/components/buttons/filters/ChipFilters.vue"
 
 const createWrapper = (props) => 
 {
-  return mount(CleaningFilters, {
-    props, 
-  })
+  return mount(
+    ChipFilters,
+    {
+      props, 
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
-describe("CleaningFilters", () => 
+describe("ChipFilters", () => 
 {
   it("renders both Filters components", () => 
   {
-    const wrapper = createWrapper()
+    const wrapper = createWrapper({
+      filters: MAP_FILTERS,
+    })
 
     const filtersComponents = wrapper.findAllComponents({
       name: "Filters", 
@@ -22,41 +33,54 @@ describe("CleaningFilters", () =>
 
   it("toggles filter state and emits updated-active event", async () => 
   {
-    const wrapper = createWrapper()
+    const FILTERS = {
+      1: "foo",
+      2: "bar",
+    }
+    const wrapper = createWrapper({
+      filters: FILTERS,
+    })
+    const spy = vi.spyOn(wrapper.vm, "handleClick")
 
     // Find the first filter in the inactive filters component
-    const inactiveFilter = wrapper.findComponent({
-      name: "Filters", 
-    }).find("button")
-    await inactiveFilter.trigger("click")
+    const initText = wrapper.findAllComponents({
+      name:"MyButton",
+    })[0].text()
 
-    // Expect the first filter to be moved to the active filters component
-    const activeFiltersComponent = wrapper.findAllComponents({
-      name: "Filters", 
-    })[1]
-    const activeFilter = activeFiltersComponent.find("button")
-    expect(activeFilter.text()).toBe(inactiveFilter.text())
+    // Expect the first filter to be moved to the active filters component after clicked
+    const myButtonComponent = wrapper.findComponent({
+      name: "MyButton", 
+    })
+    await myButtonComponent.trigger("click")
+    expect(spy).toHaveBeenCalled()
+
+    const nextText = wrapper.findAllComponents({
+      name:"MyButton",
+    })[1].text()
+    expect(nextText).toBe(initText)
 
     // Expect the updated-active event to be emitted with the activated filter
     const emitted = wrapper.emitted("updated-active")
     expect(emitted).toBeTruthy()
-    expect(emitted[0]).toEqual([
+    expect(emitted[1]).toEqual([
       [
         {
           active: true,
-          id: 0,
-          title: emitted[0][0].title, 
+          id: 2,
+          title: "bar",
         },
       ],
     ])
 
     // Toggle the filter back to inactive
-    await activeFilter.trigger("click")
+    await wrapper.findAllComponents({
+      name:"MyButton",
+    })[1].trigger("click")
 
     // Expect the filter to be moved back to the inactive filters component
-    const inactiveFiltersComponent = wrapper.findComponent({
-      name: "Filters", 
-    })
-    expect(inactiveFiltersComponent.find("button").text()).toBe(inactiveFilter.text())
+    const finalInactiveText = wrapper.findAllComponents({
+      name:"MyButton",
+    })[0].text()
+    expect(finalInactiveText).toBe(initText)
   })
 })

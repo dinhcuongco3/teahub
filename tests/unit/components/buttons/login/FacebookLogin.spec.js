@@ -4,15 +4,15 @@ import FacebookLogin from "@/components/buttons/login/FacebookLogin.vue"
 const createWrapper = () => 
 {
   return mount(
-		FacebookLogin,
-		{
-			global: {
-				stubs: [
-					"FontAwesomeIcon",
-				],
-			},
-		},
-	)
+    FacebookLogin,
+    {
+      global: {
+        stubs: [
+          "FontAwesomeIcon",
+        ],
+      },
+    }
+  )
 }
 
 describe("FacebookLogin", () => 
