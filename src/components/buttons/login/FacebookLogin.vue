@@ -6,7 +6,7 @@ Button to activate a facebook account authenticator
     </div>
     <MyButton
       class="social-button"
-      @click="facebookLogin"
+      @click="facebookLogin()"
     >
       <font-awesome-icon
         alt="Facebook Logo" 

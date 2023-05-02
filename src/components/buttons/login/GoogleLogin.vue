@@ -5,7 +5,7 @@
     </div>
     <MyButton
       class="social-button"
-      @click="googleLogin"
+      @click="googleLogin()"
     >
       <font-awesome-icon
         alt="Google Logo" 
@@ -37,9 +37,10 @@ export default {
   {
     /**
      * Use firebase to support logging in with a google account
+		 * @todo Configure with some .env vars
      *
      * @returns {void}
-     * @since 0.1.0
+     * @since 0.0.0
      */
     async googleLogin ()
     {
