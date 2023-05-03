@@ -2,6 +2,20 @@ import { mount } from "@vue/test-utils"
 import NewUserLogin from "@/components/buttons/login/NewUserLogin.vue"
 
 vi.mock("firebase/auth")
+vi.mock("firebase/app", () => 
+{
+  return {
+    __esModule: true,
+    default: {
+      auth: vi.fn(() => 
+      {
+        return {
+          createUserWithEmailAndPassword: vi.fn(),
+        }
+      }),
+    },
+  }
+})
 
 const createWrapper = (propsData = {}, data = {}) => 
 {
@@ -230,6 +244,25 @@ describe("NewUserLogin", () =>
     )
     const spy = vi.spyOn(wrapper.vm, "handleClick")
     wrapper.findComponent("[data-testid=\"new-user-login-wrapper\"]").trigger("click")
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it("calls registerNewUser appropriately", () => 
+  {
+    const wrapper = createWrapper(
+      {
+        email: "test@example.com",
+        password: "Testing123",
+        passwordsMatch: true, 
+        ready: true,
+      }
+    )
+    const spy = vi.spyOn(wrapper.vm, "registerNewUser")
+
+    expect(wrapper.vm.isDisabled).toBeFalsy()
+    wrapper.findComponent({
+      name: "MyButton",
+    }).trigger("click")
     expect(spy).toHaveBeenCalled()
   })
 })

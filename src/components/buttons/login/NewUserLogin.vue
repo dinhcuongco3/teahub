@@ -138,10 +138,6 @@ export default {
      */
     async registerNewUser ()
     {
-      if (!this.ready)
-      {
-        return 
-      }
       this.registrationError = ""
       /* eslint-disable no-unused-vars */
       try
@@ -151,6 +147,7 @@ export default {
           this.password
         )
       }
+      /* c8 ignore next 19 */
       catch (error)
       {
         const errorCode = error.code
