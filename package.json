@@ -10,7 +10,8 @@
     ".": {
       "import": "./dist/teahub.es.js",
       "require": "./dist/teahub.umd.cjs"
-    }
+    },
+		"./dist/style.css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
