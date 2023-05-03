@@ -62,10 +62,6 @@ module.exports = {
             "svg": "always",
           },
         ],
-        "vue/multi-word-component-names": [
-          "off",
-          {},
-        ],
         "vue/no-multi-spaces": [
           "error",
           // All options currently default
@@ -308,5 +304,9 @@ module.exports = {
         },
       },
     ],
+        "vue/multi-word-component-names": [
+          "off",
+          {},
+        ],
   },
 }

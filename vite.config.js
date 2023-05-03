@@ -26,8 +26,8 @@ export default defineConfig({
       "module",
     ],
     // File suffix name that needs to be omitted
-		// Note: If an ignored suffix name is configured here,
-		// an error will be reported if it is imported with a suffix name
+    // Note: If an ignored suffix name is configured here,
+    // an error will be reported if it is imported with a suffix name
     extensions: [
       ".vue",
       ".js",
@@ -47,27 +47,29 @@ export default defineConfig({
         },
       },
     },
-		// TODO: What does this do
+    // TODO: What does this do
     modules: true,
   },
   // Package configuration
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'teahub',
+      entry: resolve(__dirname, "src/index.js"),
+      name: "teahub",
       // the proper extensions will be added
-      //fileName: 'teahub'
+      // fileName: 'teahub'
       fileName: (format) => `teahub.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
-			// into your library
-      external: ['vue'],
+      // into your library
+      external: [
+        "vue",
+      ],
       output: {
         // Provide global variables to use in the UMD build for externalized deps
         globals: {
-          vue: 'Vue',
+          vue: "Vue",
         },
       },
     },
