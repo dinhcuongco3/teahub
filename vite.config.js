@@ -51,9 +51,26 @@ export default defineConfig({
   // Package configuration
   build: {
     target: "modules",
-    outDir: "dist", // Specify the output path
+    outDir: "lib", // Specify the output path
     assetsDir: "assets", // Specify the storage path of the generated static resources
     minify: "terser", // obfuscator, the file size is smaller after terser is built
+    lib: {
+      // Could also be a dictionary or array of multiple entry points
+      entry: resolve(__dirname, 'lib/teahub.js'),
+      name: 'teahub',
+      // the proper extensions will be added
+      fileName: (format) => `YOUR_LIBRARY_NAME.${format}.js`,
+    },
+    rollupOptions: {
+      // make sure to externalize deps that shouldn't be bundled into your library
+      external: ['vue'],
+      output: {
+        // Provide global variables to use in the UMD build for externalized deps
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
   },
   // Local running configuration, and reverse proxy configuration
   server: {

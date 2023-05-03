@@ -1,6 +1,17 @@
 {
   "name": "teahub",
   "version": "0.0.0",
+  "description": "Vue front end applications and components",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/teahub.umd.cjs",
+  "module": "./dist/teahub.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/teahub.es.js",
+      "require": "./dist/teahub.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -66,8 +77,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "description": "Small front end applications and components",
-  "main": "app.js",
   "directories": {
     "test": "tests"
   },
