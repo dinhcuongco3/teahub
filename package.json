@@ -1,7 +1,6 @@
 {
   "name": "teahub",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -66,5 +65,28 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "Small front end applications and components",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Twoody/teahub.git"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "vitest",
+    "front-end",
+    "components",
+    "library"
+  ],
+  "author": "Tanner Woody",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Twoody/teahub/issues"
+  },
+  "homepage": "https://github.com/Twoody/teahub#readme"
 }
