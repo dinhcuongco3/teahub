@@ -97,3 +97,142 @@
 
 @color-primary-monochromatic-1: @color-lavendar;
 @color-primary-monochromatic-2: @color-purple;
+
+@media (hover: hover) {
+  .my-button-wrapper {
+    &:not(.disabled):hover  {
+      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+      border: 1px solid @color-pastel-blue;;
+      cursor: pointer;
+      filter: brightness(102%);
+      transform: scale(1.07);
+    }
+
+  }
+  &.disabled:hover  {
+    box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+    filter: brightness(79%);
+  }
+}
+
+
+.my-button-wrapper {
+  background: @color-pastel-blue;
+  border: none;
+  border-radius: 12px;
+  color: @myblack;
+  cursor: pointer;
+  font-size: 18px;
+  min-height: 52px;
+  transition: all 0.2s ease;
+  outline: none;
+  user-select: none;
+  width: 100%;
+
+  &.active {
+    filter: brightness(110%);
+  }
+  &.disabled {
+    cursor: not-allowed;
+    filter: brightness(80%);
+    opacity: 0.9;
+  }
+  &.inactive {
+    filter: brightness(90%);
+  }
+  &.progress {
+    cursor: wait;
+    text-align: center;
+  }
+  &.pill {
+    border: 1px solid @myblack;
+    border-radius: 9px;
+    color: @myblack;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: monospace;
+    font-size: 13px;
+    margin: 5px;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    min-height: 0px;
+    min-width: 69px;
+    width: auto;
+  }
+  &.success
+  {
+    line-height: 20px;
+  }
+  .badge {
+    @diameter: 22px;
+    @radius: calc(@diameter / 2);
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    font-size: 12px;
+    height: @diameter;
+    justify-content: center;
+    position: absolute;
+    right: calc(@radius * -1);
+    top: calc(@radius * -1);
+    transition: all .3s;
+    width: @diameter;
+    z-index: 100; 
+  }
+  &.invert-colors {
+    color: @color-pastel-blue;
+    background: @myblack;
+  }
+  &:not(.disabled):focus  {
+    border: none;
+    filter: brightness(102%);
+    transform: scale(1.02);
+  }
+  &:not(.disabled):active  {
+    box-shadow: 3px -2px 3px 0px rgb(0 0 0 / 50%);
+    border: 1px solid @color-pastel-blue;;
+    cursor: pointer;
+    filter: brightness(102%);
+    outline: 1px solid @color-pastel-blue;
+    transform: scale(1.07);
+  }
+  &.disabled:active  {
+    box-shadow: 1px -1px 1px 0px rgb(0 0 0 / 40%);
+    outline: 4px solid @color-focus;
+    filter: brightness(73%);
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  opacity: 0;
+  transition: all .1s ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.shake {
+  animation: shake 1s;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

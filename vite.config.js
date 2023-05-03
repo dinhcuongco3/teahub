@@ -5,7 +5,6 @@ import vue from "@vitejs/plugin-vue"
 export default defineConfig({
   plugins: [
     vue(),
-    // antd introduces configuration on demand
   ],
   resolve: {
     // Path alias configuration
@@ -26,7 +25,9 @@ export default defineConfig({
     mainFields: [
       "module",
     ],
-    // File suffix name that needs to be omitted Note: If an ignored suffix name is configured here, an error will be reported if it is imported with a suffix name
+    // File suffix name that needs to be omitted
+		// Note: If an ignored suffix name is configured here,
+		// an error will be reported if it is imported with a suffix name
     extensions: [
       ".vue",
       ".js",
@@ -46,20 +47,17 @@ export default defineConfig({
         },
       },
     },
+		// TODO: What does this do
     modules: true,
   },
   // Package configuration
   build: {
-    target: "modules",
-    outDir: "lib", // Specify the output path
-    assetsDir: "assets", // Specify the storage path of the generated static resources
-    minify: "terser", // obfuscator, the file size is smaller after terser is built
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'lib/teahub.js'),
+      entry: resolve(__dirname, 'lib/main.js'),
       name: 'teahub',
       // the proper extensions will be added
-      fileName: (format) => `YOUR_LIBRARY_NAME.${format}.js`,
+      fileName: 'teahub'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled into your library
@@ -76,13 +74,5 @@ export default defineConfig({
   server: {
     cors: true, // enable by default and allow any source
     open: true, // automatically open the application in the browser when the server starts
-    // Reverse proxy configuration, pay attention to the writing of rewrite, I did not read the document at the beginning, I stepped on the pit here
-    proxy: {
-      "/api": {
-        target: "http://localhost:9091", // Proxy interface
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
   },
 })
