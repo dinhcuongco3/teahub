@@ -8,7 +8,7 @@ coverage
 
 # NPM
 node_modules
-/dist
+dist
 
 # Log files
 npm-debug.log*
