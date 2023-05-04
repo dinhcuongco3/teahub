@@ -1,0 +1,108 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `DialogModal.stories.js` for the `DialogModal.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//modals/DialogModal.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "DialogModal.vue":
+```
+<template>
+  <div
+    v-if="visible"
+    class="dialog-modal"
+  >
+    <div
+      class="dialog-overlay"
+      @click="close"
+    />
+    <div
+      class="dialog-content"
+      :style="{ backgroundColor: backgroundColor }"
+    >
+      <h2
+        class="dialog-header"
+        :style="{ backgroundColor: headerColor }"
+      >
+        <slot name="title"/>
+      </h2>
+      <div
+        class="dialog-body"
+        :style="{ backgroundColor: bodyColor }"
+      >
+        <slot name="body"/>
+      </div>
+      <div
+        class="dialog-footer"
+        :style="{ backgroundColor: footerColor }"
+      >
+        <MyButton
+          class="dialog-button"
+          :style="{ backgroundColor: buttonColor }"
+          @click="close"
+        >
+          {{ closeButtonLabel }}
+        </MyButton>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import MyButton from "components/buttons/MyButton.vue"
+
+export default {
+  name: "DialogModal",
+  components:
+  {
+    MyButton,
+  },
+  props: {
+    backgroundColor: {
+      default: "#FFFFFF",
+      type: String,
+    },
+    bodyColor: {
+      default: "#FFFFFF",
+      type: String,
+    },
+    buttonColor: {
+      default: "#FFFFFF",
+      type: String,
+    },
+    closeButtonLabel: {
+      default: "Close",
+      type: String,
+    },
+    footerColor: {
+      default: "#2196F3",
+      type: String,
+    },
+    headerColor: {
+      default: "#2196F3",
+      type: String,
+    },
+    visible: {
+      required: true,
+      type: Boolean,
+    },
+  },
+  methods: {
+    close () 
+    {
+      this.$emit("close")
+    },
+  },
+}
+</script>
+
+```
+

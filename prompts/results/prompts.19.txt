@@ -1,0 +1,61 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `TableOfContents.stories.js` for the `TableOfContents.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//common/TableOfContents.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "TableOfContents.vue":
+```
+<template>
+  <div
+    aria-labelledby="toc-heading"
+    class="toc-wrapper"
+    role="navigation"
+  >
+    <h2 id="toc-heading">
+      Contents
+    </h2>
+    <ol>
+      <li
+        v-for="content in contents"
+        :key="content.id"
+      >
+        <a :href="content.href">
+          {{ content.formatted }}
+        </a>
+      </li>
+    </ol>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: "TableOfContents",
+  data () 
+  {
+    return {}
+  },
+  props:
+  {
+    /** All the content to be indexed */
+    contents:
+    {
+      required: true,
+      type: Array,
+    },
+  },
+}
+</script>
+
+```
+

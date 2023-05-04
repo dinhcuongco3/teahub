@@ -1,0 +1,31 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `Spinner.stories.js` for the `Spinner.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//common/loading/Spinner.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "Spinner.vue":
+```
+The best loading spinner
+<template>
+  <div class="loading-spinner">
+    <font-awesome-icon icon="spinner" spin />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Spinner",
+}
+</script>
+```
+

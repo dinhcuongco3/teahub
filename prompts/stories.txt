@@ -10,7 +10,7 @@ export const Primary = Template.bind({});
 Primary.args = { primary: true };
 ```
 
-Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/<comp-path>`. 
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/<comp-path>`. Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
 
 The following is the contents of "<comp-name>.vue":
 ```

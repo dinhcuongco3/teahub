@@ -1,0 +1,84 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `Endorsements.stories.js` for the `Endorsements.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//anchors/endorsements/Endorsements.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "Endorsements.vue":
+```
+<template>
+  <div class="flex-box endorsements-wrapper">
+    <ul>
+      <li
+        v-for="endorser in notCitizens"
+        :key="endorser.id"
+      >
+        <Endorsement
+          :href="endorser.href"
+          :fullname="endorser.fullname"
+          :position="endorser.position"
+        />
+      </li>
+      <li
+        v-if="citizens.length"
+        ref="citizens"
+      >
+        Engaged Citizens:
+        <ul>
+          <li
+            v-for="endorser in citizens"
+            :key="endorser.id"
+          >
+            <Endorsement
+              :key="endorser.id"
+              :fullname="endorser.fullname"
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import Endorsement from "components/anchors/endorsements/Endorsement.vue"
+export default {
+  name: "Endorsements",
+  components:
+  {
+    Endorsement,
+  },
+  props: {
+    endorsers: {
+      required: true,
+      type: Array,
+    },
+  },
+  computed: {
+    // TODO: Magic number
+    /** @returns {Array} List of endorsers who are citizens */
+    citizens () 
+    {
+      return this.endorsers.filter((endorser) => endorser.endorsementType === 1)
+    },
+
+    // TODO: Magic number
+    /** @returns {Array} List of endorsers who are NOT citizens */
+    notCitizens () 
+    {
+      return this.endorsers.filter((endorser) => endorser.endorsementType !== 1)
+    },
+  },
+}
+</script>
+```
+

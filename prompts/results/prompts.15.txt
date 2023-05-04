@@ -1,0 +1,91 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `AppSection.stories.js` for the `AppSection.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//common/AppSection.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "AppSection.vue":
+```
+<template>
+  <div
+    class="app-section-wrapper"
+    :class="getClasses()"
+    :style="styles"
+    @click="$emit('click')"
+  >
+    <!-- @slot Use this slot to place the full section content -->
+    <slot />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "AppSection",
+  props:
+  {
+    /**
+     * Whether justified center
+     *
+     * @since 0.1.0
+     */
+    centered: Boolean,
+
+    /**
+     * Whether the section is showing in a collapsed state or not
+     *
+     * @since 0.1.0
+     */
+    isCollapsed: Boolean,
+
+    /**
+     * Whether the section is showing at all or not
+     *
+     * @since 0.1.0
+     */
+    isShowing: Boolean,
+
+    /**
+     * String of styles to be applied to main wrapper;
+     *
+     * @todo Arrange into props and make computed
+     * @since 0.1.0
+     */
+    styles:
+    {
+      default: "",
+      required: false,
+      type: String,
+    },
+  },
+  methods:
+  {
+    /**
+     *
+     * @returns {object} Styles to be applied when in different states;
+     * @since 0.1.0
+     * @public
+     */
+    getClasses ()
+    {
+      return {
+        "centered": this.isShowing && this.centered,
+        "is-collapsed": this.isShowing && this.isCollapsed,
+        "is-hidden": !this.isShowing,
+        "is-showing": this.isShowing && !this.isCollapsed,
+      }
+    },
+  },
+}
+</script>
+
+```
+

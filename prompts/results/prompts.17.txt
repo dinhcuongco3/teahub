@@ -1,0 +1,35 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `FlexTable.stories.js` for the `FlexTable.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//common/FlexTable.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "FlexTable.vue":
+```
+<template>
+  <div class="flex-table-wrapper">
+    <div class="category-section">
+      <slot name="category"/>
+    </div>
+    <div class="content-section">
+      <slot name="content"/>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FlexTable",
+}
+</script>
+```
+

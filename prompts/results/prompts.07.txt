@@ -1,0 +1,45 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `MyFilter.stories.js` for the `MyFilter.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//buttons/filters/MyFilter.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "MyFilter.vue":
+```
+<template>
+  <MyButton
+    :active="!inactive"
+    class="my-filter-wrapper"
+    :inactive="inactive"
+    pill
+  >
+    <slot/>
+  </MyButton>
+</template>
+
+<script>
+import MyButton from "components/buttons/MyButton.vue"
+
+export default {
+  name: "MyFilter",
+  components:
+  {
+    MyButton,
+  },
+  props: {
+    /** Is current filter being applied */
+    inactive: Boolean,
+  },
+}
+</script>
+```
+

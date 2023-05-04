@@ -1,0 +1,139 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `AvailabilitySearchBar.stories.js` for the `AvailabilitySearchBar.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//inputs/AvailabilitySearchBar.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "AvailabilitySearchBar.vue":
+```
+<template>
+  <div class="availability-search-bar-wrapper">
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <div class="date-container">
+        <div class="flex-box">
+          <span
+            class="label"
+            data-testid="date-selector-start-label"
+          >
+            Start Date
+          </span>
+          <!-- /* c8 ignore next 7 */ -->
+          <DateSelector
+            data-testid="date-selector-start"
+            :isLoading="isLoading"
+            :maxDate="maxDate"
+            :minDate="today"
+            :value="start"
+            @newDate="updateStartDate($event)"
+          />
+        </div>
+        <div class="flex-box">
+          <span
+            class="label"
+            data-testid="date-selector-end-label"
+          >
+            End Date
+          </span>
+          <!-- /* c8 ignore next 7 */ -->
+          <DateSelector
+            data-testid="date-selector-end"
+            :isLoading="isLoading"
+            :maxDate="maxDate"
+            :minDate="minDateEnd"
+            :value="end"
+            @newDate="updateEndDate($event)"
+          />
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script>
+import {DateTime} from "luxon"
+import DateSelector from "@/components/inputs/DateSelector.vue"
+
+export default {
+  name: "AvailabilitySearchBar",
+  components:
+  {
+    DateSelector,
+  },
+  data: function()
+  {
+    return {}
+  },
+  props:
+  {
+    /** Selected end date for the calendar */
+    end:
+    {
+      default: "",
+      required: false,
+      type: String,
+    },
+
+    /** Whether we are in loading state or not */
+    isLoading: Boolean,
+
+    /** Selected start date for the calendar */
+    start:
+    {
+      default: "",
+      required: false,
+      type: String,
+    },
+  },
+  computed:
+  {
+    /**
+     * @returns {string} The max date the user can book out too
+     */
+    maxDate () 
+    {
+      // Eighteen months in the future
+      let jump18 = DateTime.local().plus({
+        months: 6,
+        years: 1,
+      })
+      return jump18.toFormat("yyyy-MM-dd")
+    },
+
+    minDateEnd () 
+    {
+      return this.today
+    },
+
+    today ()
+    {
+      return DateTime.local().toFormat("yyyy-MM-dd")
+    },
+  },
+  methods:
+  {
+    updateEndDate (v)
+    {
+      this.$emit("updateEndDate", v)
+    },
+
+    updateStartDate (v)
+    {
+      this.$emit("updateStartDate", v)
+    },
+  },
+}
+</script>
+```
+

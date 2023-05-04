@@ -1,0 +1,49 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `QuestionAccordion.stories.js` for the `QuestionAccordion.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//accordions/QuestionAccordion.vue`. 
+
+The following is the contents of "QuestionAccordion.vue":
+```
+<template>
+  <div class="question-accordion-wrapper">
+    <Accordion
+      class="accordion-section"
+      has-nested
+    >
+      <template #title>
+        <h2>
+          <slot name="title"/>
+        </h2>
+      </template>
+      <template #content>
+        <div class="accordion-content">
+          <slot name="content"/>
+        </div>
+      </template>
+    </Accordion>
+  </div>
+</template>
+
+<script>
+import Accordion from "components/accordions/Accordion.vue"
+
+export default {
+  name: "QuestionAccordion",
+  components:
+  {
+    Accordion,
+  },
+}
+</script>
+```
+

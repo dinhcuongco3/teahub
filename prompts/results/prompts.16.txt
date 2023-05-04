@@ -1,0 +1,48 @@
+I am writing "stories" for a front end library. I am using vite, storybook, and vue3.
+Your job is to create a `Copyright.stories.js` for the `Copyright.vue` component. Ensure to   create a base `const Template` which the stories can use a `bind` method from. For example:
+```
+const Template = (args) => ({
+  components: { Foo },
+  setup() { return { args }; },
+  template: '<foo v-bind="args" />',
+});
+export const Primary = Template.bind({});
+Primary.args = { primary: true };
+```
+
+Ensure slots are covered in the template.  Ensure `argTypes` provide adequate coverage for the component. Ensure the export includes `tags: ["autodocs"]. Ensure the component is imported from `@/components//common/Copyright.vue`. 
+Ensure that the following import is mentioned: `import "@/assets/styles/styles.less"`.
+
+The following is the contents of "Copyright.vue":
+```
+<template>
+  <div class="copyright-wrapper">
+    Copyright
+    <font-awesome-icon
+      data-testid="teahub-copyright"
+      icon="fa fa-copyright"
+    />&nbsp;
+    {{ formattedYear }}
+    Tanner Woody All Rights Reserved
+  </div>
+</template>
+
+<script>
+import {DateTime} from "luxon"
+
+export default {
+  name: "Copyright",
+  computed:
+  {
+    /**
+     * @returns {string} Year in yyyy format
+     */
+    formattedYear ()
+    {
+      return DateTime.local().toFormat("yyyy")
+    },
+  },
+}
+</script>
+```
+
