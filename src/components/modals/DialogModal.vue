@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .dialog-modal {
   align-items: center;
   display: flex;

@@ -138,20 +138,3 @@ export default {
   },
 }
 </script>
-
-<style lang="less" scoped>
-@import "../../../../assets/styles/styles";
-
-.amenities-section {
-  border: 1px solid @myblack;
-  border-radius: 7px;
-  max-width: 500px;
-  width: 96%;
-
-  h2 {
-    font-size: 25px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-}
-</style>

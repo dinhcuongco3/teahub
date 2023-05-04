@@ -1,6 +1,6 @@
 <template>
   <MyButton
-    class="email-button"
+    class="email-button-wrapper"
     pill
     tabindex="-1"
   >
@@ -46,21 +46,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="less">
-@import "../../../assets/styles/styles";
-.email-button {
-  a {
-    font-weight: bold;
-    color: @color-third-font;
-  }
-
-  min-height: 32px;
-  margin-left: 10px;
-  margin-right: 10px;
-  max-width: 200px;
-  min-width: 100px;
-  width: auto;
-}
-</style>
-

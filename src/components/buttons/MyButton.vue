@@ -164,7 +164,3 @@ export default
   },
 }
 </script>
-
-<style scoped lang="less">
-@import "../../assets/styles/styles.less";
-</style>

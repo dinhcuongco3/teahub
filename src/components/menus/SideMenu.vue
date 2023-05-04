@@ -62,7 +62,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .sidebar {
   background-color: #f5f5f5;
   display: flex;
@@ -117,5 +116,4 @@ export default {
     }
   }
 }
-
 </style>

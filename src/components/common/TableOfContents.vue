@@ -41,7 +41,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../../assets/styles/styles";
 .toc-wrapper {
   align-items: center;
   display: flex;
@@ -70,4 +69,3 @@ export default {
   margin: 0;
 }
 </style>
-

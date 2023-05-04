@@ -54,7 +54,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "../../../../assets/styles/styles";
 .filters-wrapper {
   -ms-overflow-style: none;  /* IE and Edge scrollbar */
   align-content: center;

@@ -31,24 +31,23 @@ export default
 </script>
 
 <style scoped lang="less">
+.validatable {
+	.error-message {
+		color: #F5AF11;
+		font-weight: 900;
+		position: relative;
+		opacity: 1;
+		text-align: left;
+		top: -4px;
+	}
 
-  .validatable {
-    .error-message {
-      color: #F5AF11;
-      font-weight: 900;
-      position: relative;
-      opacity: 1;
-      text-align: left;
-      top: -4px;
-    }
+	.pull-up-enter-active {
+		transition: opacity .5s, top .5s;
+	}
 
-    .pull-up-enter-active {
-      transition: opacity .5s, top .5s;
-    }
-
-    .pull-up-enter {
-      opacity: 0;
-      top: 10px;
-    }
-  }
+	.pull-up-enter {
+		opacity: 0;
+		top: 10px;
+	}
+}
 </style>

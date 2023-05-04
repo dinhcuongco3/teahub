@@ -213,17 +213,16 @@ export default
 </script>
 
 <style scoped lang="less">
-  .date-selector-wrapper {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    flex-grow: 1;
-    justify-content: space-evenly;
-    width: 100%;
+.date-selector-wrapper {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	flex-grow: 1;
+	justify-content: space-evenly;
+	width: 100%;
 
-    .date-input {
-    }
-  }
+	.date-input {
+	}
+}
 </style>
-

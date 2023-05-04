@@ -134,11 +134,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="less">
-@import "../../../../assets/styles/styles";
-
-.cleaning-filters-wrapper {
-}
-</style>
-

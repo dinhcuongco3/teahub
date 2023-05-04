@@ -67,28 +67,3 @@ export default {
   },
 }
 </script>
-
-<style lang="less" scoped>
-@import "../../../../assets/styles/styles";
-
-.search-execute {
-  background-color: @color-pastel-blue !important;
-  height: 50px;
-  margin-bottom: 11px;
-  margin-top: 5px;
-  max-width: min(98%, 660px);
-  padding: 3px;
-
-  .execute-text {
-    margin: auto;
-  }
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-</style>

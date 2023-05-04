@@ -67,17 +67,3 @@ export default {
   },
 }
 </script>
-
-<style lang="less" scoped>
-@import "../../../../assets/styles/styles";
-.endorsement-wrapper {
-  .linked {
-    color: @myblack;
-    font-weight: 900;
-    text-decoration: none;
-  }
-  .not-linked {
-    font-weight: 500;
-  }
-}
-</style>
