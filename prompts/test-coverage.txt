@@ -1,0 +1,5 @@
+I am writing tests for a front end library. I am using vite, vitest, and vu3. Your job is to increase the test coverage of the following code with tests written in vitest.  Ensure to use the vitest `mount` instead of `render`.  Ensure a helper function is created at the start of the file to create the `wrapper` using `mount`.
+
+
+```
+```
