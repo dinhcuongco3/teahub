@@ -4,7 +4,7 @@
     :class="classes"
     :type="submit ? 'submit' : 'button'"
     @animationend="onShakeEnd"
-    @click.stop="onClick()"
+    @click.stop="onClick($event)"
   >
     <div
       v-if="badgeContent"
