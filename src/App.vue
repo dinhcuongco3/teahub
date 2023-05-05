@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-		<component
-			id="content-wrapper"
-			:is="Component"
-		/>
+    <component
+      id="content-wrapper"
+      :is="Component"
+    />
   </div>
 </template>
 
@@ -14,8 +14,7 @@ export default {
   components: {},
   data: function()
   {
-    return {
-    }
+    return {}
   },
   computed: {},
   watch: {},

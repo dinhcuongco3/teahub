@@ -260,16 +260,23 @@
   user-select: none;
   width: 100%;
 
-  &.active {
-    filter: brightness(110%);
-  }
+
+	.fade-enter-active, .fade-leave-active {
+		opacity: 0;
+		transition: all .1s ease;
+	}
+	.fade-enter, .fade-leave-to {
+		opacity: 0;
+	}
+
+	&.shake {
+		animation: shake 1s;
+	}
+
   &.disabled {
     cursor: not-allowed;
     filter: brightness(80%);
     opacity: 0.9;
-  }
-  &.inactive {
-    filter: brightness(90%);
   }
   &.progress {
     cursor: wait;
@@ -336,18 +343,6 @@
     outline: 4px solid @color-focus;
     filter: brightness(73%);
   }
-}
-
-.fade-enter-active, .fade-leave-active {
-  opacity: 0;
-  transition: all .1s ease;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.shake {
-  animation: shake 1s;
 }
 
 @keyframes shake {
