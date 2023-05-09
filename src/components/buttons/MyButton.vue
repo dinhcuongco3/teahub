@@ -121,7 +121,6 @@ export default
     // The user wants to click the button. Propogate event if button is not disabled.
     onClick (ev)
     {
-      console.log("sanity 1")
       if (ev?.preventDefault) 
       {
         ev.preventDefault()
@@ -130,12 +129,10 @@ export default
       {
         return
       }
-      console.log("sanity 2")
       this.doingWork = true
 
       if (this.disabled)
       {
-        console.log("k")
         // Button is disabled: play animation and send event
         this.beginShake()
         this.doingWork = false
