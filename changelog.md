@@ -4,6 +4,9 @@
 	** All the stories
 	** ChatGPT created via `./prompts`
 	** `./prompts/generated/stories.*.txt` for posterity
+	* Updated tests
+	* MyButton mods
+	** Added back `active` and `inactive` as they are different than `disabled`
 	* Cleanup
 	** `app.vue`
 	** Unused `*.stories.*` files
