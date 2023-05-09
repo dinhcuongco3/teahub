@@ -1,3 +1,17 @@
+0.0.5
+  * Actually use the changelog
+	* Storybook initalization
+	** All the stories
+	** ChatGPT created via `./prompts`
+	** `./prompts/generated/stories.*.txt` for posterity
+	* Cleanup
+	** `app.vue`
+	** Unused `*.stories.*` files
+
+0.0.4 - c4f1a4a40946ad15274877c5b5e33e8d97ce996d
+	* Moved all styles to styles.less
+	** There was a `less` compilation error with the relative import
+
 0.0.3 - b33fee667af2a182e400de16f111a05d51e37a61
   * Add exports for the rest of the components
 	* Lint files
