@@ -58,11 +58,11 @@ export default
     /** Is button currently not activated  */
     inactive: Boolean, 
 
-    /** Is button currently doing a job */
-    inProgress: Boolean,
-
     /** Invert the colors in on a light background */
     invertColors: Boolean,
+
+    /** Is button currently doing a job */
+    inProgress: Boolean,
 
     /** Whether is a smaller pill button or not */
     pill: Boolean,

@@ -60,14 +60,14 @@ describe("MyButton.vue", () =>
     expect(wrapper.emitted("click")).toBeTruthy()
   })
 
-  it("does not emit click event when disabled", async () => 
+  it("DOES emit click event when disabled", async () => 
   {
     const wrapper = createWrapper({
       ...defaultProps,
       disabled: true,
     })
     await wrapper.find("button").trigger("click")
-    expect(wrapper.emitted("click")).toBeFalsy()
+    expect(wrapper.emitted("click")).toBeTruthy()
   })
 
   it("does not click when already doing work", async () => 

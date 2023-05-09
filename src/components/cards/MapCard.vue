@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     /**
-     * @todo Cannot do a router push here, I thinks
+     * @todo Setup to do an emit instead
      * @param {string} id - Poorly names object s.t. id is string and not int
      */
     gotoItem (id) 

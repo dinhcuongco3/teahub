@@ -93,7 +93,7 @@ describe("NavBar Component", () =>
     }
     catch (e)
     {
-      console.log("me")
+			console.error(e)
     }
   })
 })

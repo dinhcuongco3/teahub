@@ -127,16 +127,19 @@ export default {
      */
     async handleAvailabilitySearch ()
     {
-			if (!this.isBookingEnabled) {
-				// Do nothing and tell user why "nothing"
+      if (!this.isBookingEnabled) 
+      {
+        // Do nothing and tell user why "nothing"
         this.hasError = true
-			}
-			else {
-				this.processBookingRequeset()
-			}
-     },
+      }
+      else 
+      {
+        await this.processBookingRequeset()
+      }
+    },
 
-		async processBookingRequeset() {
+    async processBookingRequeset () 
+    {
       this.hasError = false
       this.isLoading = true
       try
@@ -150,9 +153,9 @@ export default {
         this.hasError = true
       }
       this.isLoading = false
-		},
+    },
 
-		/**
+    /**
      * @param selected
      * @returns {boolean} Whether the date selected was accurately processed
      */
