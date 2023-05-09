@@ -46,11 +46,17 @@ export default
   },
   props:
   {
+    /** Is button currently activated  */
+    active: Boolean, 
+
     /** Content to show in a badge */
     badgeContent: String,
 
     /** Is button disabled */
     disabled: Boolean,
+
+    /** Is button currently not activated  */
+    inactive: Boolean, 
 
     /** Is button currently doing a job */
     inProgress: Boolean,
@@ -90,7 +96,9 @@ export default
       const classes = {
         button: true,
       }
+      classes.active = !this.inactive
       classes.disabled = this.disabled || this.inProgress
+      classes.inactive = this.inactive
       classes["invert-colors"] = this.invertColors
       classes.pill = this.pill
       classes.progress = this.inProgress

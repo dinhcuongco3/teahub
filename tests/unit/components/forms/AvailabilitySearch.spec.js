@@ -58,11 +58,11 @@ describe("AvailabilitySearch Component", () =>
     expect(wrapper.find("form.is-loading").exists()).toBeTruthy()
   })
 
-  it.concurrent("handleAvailabilitySearch should not change state on success", async () => 
+  it.concurrent("processBookingRequeset should not change state on success", async () => 
   {
     expect(wrapper.vm.isLoading).toBeFalsy()
     expect(wrapper.vm.hasError).toBeFalsy()
-    await wrapper.vm.handleAvailabilitySearch()
+    await wrapper.vm.processBookingRequeset()
     expect(wrapper.vm.isLoading).toBeFalsy()
     expect(wrapper.vm.hasError).toBeFalsy()
   })
@@ -191,13 +191,13 @@ describe("AvailabilitySearch Component", () =>
     expect(wrapper.vm.isBookingEnabled).toBeTruthy()
   })
 
-  it.concurrent("handleAvailabilitySearch sets isLoading state correctly", async () => 
+  it.concurrent("processBookingRequeset sets isLoading state correctly", async () => 
   {
     const wrapper = createWrapper()
 
     expect(wrapper.vm.isLoading).toBeFalsy()
 
-    wrapper.vm.handleAvailabilitySearch()
+    wrapper.vm.processBookingRequeset()
     expect(wrapper.vm.isLoading).toBeTruthy()
 
     // Wait for the handleAvailabilitySearch method to finish execution
@@ -279,13 +279,15 @@ describe("AvailabilitySearch Component", () =>
   it.concurrent("listens to the BookButton events", async () => 
   {
     const wrapper = createWrapper()
-    const spy = vi.spyOn(wrapper.vm, "handleAvailabilitySearch")
+    const spy1 = vi.spyOn(wrapper.vm, "handleAvailabilitySearch")
+    const spy2 = vi.spyOn(wrapper.vm, "processBookingRequeset")
 
     // Disabled
     wrapper.findComponent({
       name: "BookButton", 
     }).trigger("click")
-    expect(spy).not.toHaveBeenCalled()
+    expect(spy1).toHaveBeenCalled()
+    expect(spy2).not.toHaveBeenCalled()
 
     // Enable button
     const searchBar = wrapper.findComponent({
@@ -297,6 +299,7 @@ describe("AvailabilitySearch Component", () =>
     wrapper.findComponent({
       name: "BookButton", 
     }).trigger("click")
-    expect(spy).toHaveBeenCalled()
+    expect(spy1).toHaveBeenCalled()
+    expect(spy2).toHaveBeenCalled()
   })
 })

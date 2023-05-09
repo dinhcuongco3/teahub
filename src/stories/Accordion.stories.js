@@ -24,7 +24,11 @@ const Template = (args) => ({
         This is a sample title
       </template>
       <template #content>
-        This is the content for the sample accordion
+        <p>This is the content for the sample accordion 1</p>
+        <p>This is the content for the sample accordion 2</p>
+        <p>This is the content for the sample accordion 3</p>
+        <p>This is the content for the sample accordion 4</p>
+        <p>This is the content for the sample accordion 5</p>
       </template>
     </accordion>
   `,
